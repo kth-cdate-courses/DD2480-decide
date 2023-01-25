@@ -15,4 +15,10 @@ class MainTest {
         assertEquals(9, Main.square(3));
         assertEquals(64, Main.square(8));
     }
+
+    @Test
+    @DisplayName("Failing test")
+    void failing() {
+        assertEquals(2, Main.square(3));
+    }
 }
