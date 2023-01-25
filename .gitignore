@@ -1,5 +1,7 @@
 # File taken from: https://github.com/github/gitignore/blob/main/Java.gitignore
 
+.idea
+
 # Compiled class file
 *.class
 
