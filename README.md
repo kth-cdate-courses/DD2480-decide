@@ -24,3 +24,16 @@ root
 	├── tests  
 	└── README.md   
 ```
+
+### Conventions (suggested)
+Branch namings: `<name>/<type>/<issue-number>-<descriptive branch name>`  
+Example: `sven/fix/1-change-color-of-button`
+
+
+Commits follow: https://www.conventionalcommits.org/en/v1.0.0/  
+| Where | Naming Convention |
+| -- | -- |
+| Variables | camelCase |
+| functions/methods | camelCase |
+| constants | CONSTANTS |
+| classes | PascalCase |
