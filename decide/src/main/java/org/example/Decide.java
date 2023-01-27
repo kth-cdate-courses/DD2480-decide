@@ -22,7 +22,7 @@ public class Decide {
 
     public boolean condition0() {
         return IntStream.range(0, settings.NUMPOINTS - 1).anyMatch(
-                (index) -> settings.POINTS[index].distance(settings.POINTS[index + 1]) <= settings.PARAMETERS.LENGTH1);
+                (index) -> settings.POINTS[index].distance(settings.POINTS[index + 1]) > settings.PARAMETERS.LENGTH1);
     }
 
     public boolean condition1() {
