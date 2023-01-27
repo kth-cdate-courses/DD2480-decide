@@ -22,8 +22,7 @@ public class Decide {
     public boolean condition0() {
         return Arrays.stream(settings.POINTS)
                 .filter((point) -> Arrays.stream(settings.POINTS)
-                        .anyMatch((comparePoint) -> Math.abs(point.x - comparePoint.x)
-                                + Math.abs(point.y - comparePoint.y) <= settings.PARAMETERS.LENGTH1))
+                        .anyMatch((comparePoint) -> point.distance(comparePoint) <= settings.PARAMETERS.LENGTH1))
                 .findFirst()
                 .isEmpty();
     }
