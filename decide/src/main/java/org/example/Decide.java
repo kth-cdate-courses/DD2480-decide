@@ -12,27 +12,31 @@ public class Decide {
         System.out.println(decideHelper() ? "YES" : "NO");
     }
 
+    public Boolean[] getConditionMetVector() {
+        return new Boolean[] {
+                condition0(),
+                condition1(),
+                condition2(),
+                condition3(),
+                condition4(),
+                condition5(),
+                condition6(),
+                condition7(),
+                condition8(),
+                condition9(),
+                condition10(),
+                condition11(),
+                condition12(),
+                condition13(),
+                condition14()
+        };
+    }
+
     public boolean decideHelper() {
         // TODO do stuff here
         // Create a list of booleans, one for each LIC
         // For each LIC, check if it is true or false
-        final Boolean[] licResults = {
-            condition0(),
-            condition1(),
-            condition2(),
-            condition3(),
-            condition4(),
-            condition5(),
-            condition6(),
-            condition7(),
-            condition8(),
-            condition9(),
-            condition10(),
-            condition11(),
-            condition12(),
-            condition13(),
-            condition14()
-        };
+        final Boolean[] conditionMetVector = getConditionMetVector();
         return true;
     }
 
