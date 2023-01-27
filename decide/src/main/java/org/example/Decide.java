@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.Arrays;
+
 public class Decide {
 
     private InitialSettings settings;
@@ -18,7 +20,12 @@ public class Decide {
     }
 
     public boolean condition0() {
-        return true;
+        return Arrays.stream(settings.POINTS)
+                .filter((point) -> Arrays.stream(settings.POINTS)
+                        .anyMatch((comparePoint) -> Math.abs(point.x - comparePoint.x)
+                                + Math.abs(point.y - comparePoint.y) <= settings.PARAMETERS.LENGTH1))
+                .findFirst()
+                .isEmpty();
     }
 
     public boolean condition1() {
