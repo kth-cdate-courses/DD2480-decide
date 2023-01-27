@@ -60,7 +60,7 @@ public class InitialSettings {
         }
     }
 
-    public static class Point {
+    public class Point {
         public final int x;
         public final int y;
 
