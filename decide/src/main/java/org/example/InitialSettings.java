@@ -7,8 +7,8 @@ public class InitialSettings {
     public final  LogicalOperator[][] LCM;
     public final boolean[] PUV;
 
-    public InitialSettings(int numpoints, Point[] points, Parameters parameters, LogicalOperator[][] lcm, boolean[] puv) {
-        NUMPOINTS = numpoints;
+    public InitialSettings(int numPoints, Point[] points, Parameters parameters, LogicalOperator[][] lcm, boolean[] puv) {
+        NUMPOINTS = numPoints;
         POINTS = points;
         PARAMETERS = parameters;
         LCM = lcm;
