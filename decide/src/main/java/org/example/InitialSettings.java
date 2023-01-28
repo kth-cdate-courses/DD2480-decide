@@ -7,8 +7,8 @@ public class InitialSettings {
     public final  LogicalOperator[][] LCM;
     public final boolean[] PUV;
 
-    public InitialSettings(int numpoints, Point[] points, Parameters parameters, LogicalOperator[][] lcm, boolean[] puv) {
-        NUMPOINTS = numpoints;
+    public InitialSettings(int numPoints, Point[] points, Parameters parameters, LogicalOperator[][] lcm, boolean[] puv) {
+        NUMPOINTS = numPoints;
         POINTS = points;
         PARAMETERS = parameters;
         LCM = lcm;
@@ -60,13 +60,17 @@ public class InitialSettings {
         }
     }
 
-    public static class Point {
+    public class Point {
         public final int x;
         public final int y;
 
         public Point(int x, int y) {
             this.x = x;
             this.y = y;
+        }
+
+        public double distance(Point other) {
+            return Math.sqrt(Math.pow(x - other.x, 2) + Math.pow(y - other.y, 2));
         }
     }
 }
