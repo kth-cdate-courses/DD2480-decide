@@ -13,6 +13,8 @@ public class Decide {
     }
 
     public Boolean[] getConditionMetVector() {
+        // Create a list of booleans, one for each LIC
+        // For each LIC, check if it is true or false
         return new Boolean[] {
                 condition0(),
                 condition1(),
@@ -33,9 +35,6 @@ public class Decide {
     }
 
     public boolean decideHelper() {
-        // TODO do stuff here
-        // Create a list of booleans, one for each LIC
-        // For each LIC, check if it is true or false
         final Boolean[] conditionMetVector = getConditionMetVector();
         return true;
     }
