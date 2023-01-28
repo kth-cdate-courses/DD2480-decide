@@ -68,11 +68,12 @@ public class Decide {
     }
 
     public boolean condition10() {
-        return settings.NUMPOINTS >= 5 && IntStream.range(0, settings.NUMPOINTS - 2).anyMatch(
-                (index) -> (Point.triangleArea(settings.POINTS[index],
-                        settings.POINTS[index + 1 + settings.PARAMETERS.E_PTS],
-                        settings.POINTS[index + 1 + settings.PARAMETERS.E_PTS + 1 + settings.PARAMETERS.F_PTS])
-                        > settings.PARAMETERS.AREA1));
+        return settings.NUMPOINTS >= 5 && IntStream.range(0, settings.NUMPOINTS - 2 - settings.PARAMETERS.E_PTS -
+                settings.PARAMETERS.F_PTS).anyMatch(
+                        (index) -> (Point.triangleArea(settings.POINTS[index],
+                                settings.POINTS[index + 1 + settings.PARAMETERS.E_PTS],
+                                settings.POINTS[index + 1 + settings.PARAMETERS.E_PTS + 1 + settings.PARAMETERS.F_PTS])
+                                > settings.PARAMETERS.AREA1));
     }
 
     public boolean condition11() {
