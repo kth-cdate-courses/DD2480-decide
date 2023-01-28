@@ -2,6 +2,7 @@ package org.example;
 
 import java.util.function.Function;
 import java.util.stream.IntStream;
+import org.example.InitialSettings.Point;
 
 import org.example.InitialSettings.Point;
 
@@ -36,7 +37,9 @@ public class Decide {
     }
 
     public boolean condition3() {
-        return true;
+        return IntStream.range(0, settings.NUMPOINTS - 2).anyMatch(
+                (index) -> Point.triangleArea(settings.POINTS[index], settings.POINTS[index + 1],
+                        settings.POINTS[index + 2]) > settings.PARAMETERS.AREA1);
     }
 
     public boolean condition4() {
