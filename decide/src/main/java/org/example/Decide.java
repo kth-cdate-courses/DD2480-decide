@@ -50,7 +50,8 @@ public class Decide {
     }
 
     public boolean condition7() {
-        return true;
+        return settings.NUMPOINTS >= 3 && IntStream.range(0, settings.NUMPOINTS - settings.PARAMETERS.K_PTS - 1).anyMatch(
+                (index) -> settings.POINTS[index].distance(settings.POINTS[index + settings.PARAMETERS.K_PTS + 1]) > settings.PARAMETERS.LENGTH1);
     }
 
     public boolean condition8() {
