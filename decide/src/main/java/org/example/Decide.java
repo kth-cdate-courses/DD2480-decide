@@ -1,9 +1,8 @@
 package org.example;
 
+import java.util.Arrays;
 import java.util.function.Function;
 import java.util.stream.IntStream;
-
-import org.example.InitialSettings.Point;
 
 public class Decide {
 
@@ -84,8 +83,7 @@ public class Decide {
                                                 total,
                                                 currentIndex) -> (int) (total + Math.round(settings.POINTS[index] // ! Rounding here could pose a problem, depending on accuracy it should be fine
                                                         .distance(settings.POINTS[currentIndex])))) > DIST
-                                        : IntStream.range(index, index + settings.PARAMETERS.N_PTS)
-                                                .mapToObj((innerIndex) -> settings.POINTS[innerIndex])
+                                        : Arrays.stream(settings.POINTS, index, index + settings.PARAMETERS.N_PTS)
                                                 .anyMatch(
                                                         (currentPoint) -> (currentPoint
                                                                 // Check distance from line
