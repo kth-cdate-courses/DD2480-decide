@@ -2,7 +2,6 @@ package org.example;
 
 import java.util.function.Function;
 import java.util.stream.IntStream;
-import org.example.InitialSettings.Point;
 
 import org.example.InitialSettings.Point;
 
@@ -18,8 +17,30 @@ public class Decide {
         System.out.println(decideHelper() ? "YES" : "NO");
     }
 
+    public Boolean[] getConditionMetVector() {
+        // Create a list of booleans, one for each LIC
+        // For each LIC, check if it is true or false
+        return new Boolean[] {
+                condition0(),
+                condition1(),
+                condition2(),
+                condition3(),
+                condition4(),
+                condition5(),
+                condition6(),
+                condition7(),
+                condition8(),
+                condition9(),
+                condition10(),
+                condition11(),
+                condition12(),
+                condition13(),
+                condition14()
+        };
+    }
+
     public boolean decideHelper() {
-        // TODO do stuff here
+        final Boolean[] conditionMetVector = getConditionMetVector();
         return true;
     }
 
@@ -101,7 +122,12 @@ public class Decide {
     }
 
     public boolean condition10() {
-        return true;
+        return settings.NUMPOINTS >= 5 && IntStream.range(0, settings.NUMPOINTS - 2 - settings.PARAMETERS.E_PTS -
+                settings.PARAMETERS.F_PTS).anyMatch(
+                        (index) -> (Point.triangleArea(settings.POINTS[index],
+                                settings.POINTS[index + 1 + settings.PARAMETERS.E_PTS],
+                                settings.POINTS[index + 1 + settings.PARAMETERS.E_PTS + 1 + settings.PARAMETERS.F_PTS])
+                                > settings.PARAMETERS.AREA1));
     }
 
     public boolean condition11() {
