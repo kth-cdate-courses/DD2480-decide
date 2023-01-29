@@ -34,7 +34,7 @@ public class Point {
      * the smallest circle containing the triangle has the opposite side as diameter
      * Else:
      * the smallest circle is the circumscribed circle.
-     * the radius is computed thanks to the law of sines : R = a * b * c / (4 * S)
+     * the radius is computed with the formula : R = a * b * c / (4 * S)
      * @param p1 first point
      * @param p2 second point
      * @param p3 third point
@@ -42,13 +42,13 @@ public class Point {
      */
     public static double smallestCircleRadius(Point p1, Point p2, Point p3) {
         // checking if any of the angles is obtuse
-        if (p1.angle(p2, p3) > Math.PI) {
+        if (p1.angle(p2, p3) > Math.PI / 2) {
             return (p2.distance(p3)/2);
         }
-        if (p2.angle(p1, p3) > Math.PI) {
+        if (p2.angle(p1, p3) > Math.PI / 2) {
             return (p1.distance(p3)/2);
         }
-        if (p3.angle(p1, p2) > Math.PI) {
+        if (p3.angle(p1, p2) > Math.PI / 2) {
             return (p1.distance(p2)/2);
         }
         // else, computing the radius of the circumscribed circle
