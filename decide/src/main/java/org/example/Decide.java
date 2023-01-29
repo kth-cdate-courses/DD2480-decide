@@ -26,7 +26,10 @@ public class Decide {
     }
 
     public boolean condition1() {
-        return true;
+        return IntStream.range(0, settings.NUMPOINTS - 2).anyMatch(
+                (index) -> Point.smallestCircleRadius(settings.POINTS[index],
+                        settings.POINTS[index + 1],
+                        settings.POINTS[index + 2]) > settings.PARAMETERS.RADIUS1);
     }
 
     public boolean condition2() {
@@ -54,8 +57,8 @@ public class Decide {
     public boolean condition7() {
         return settings.NUMPOINTS >= 3
                 && IntStream.range(0, settings.NUMPOINTS - settings.PARAMETERS.K_PTS - 1).anyMatch(
-                        (index) -> settings.POINTS[index].distance(
-                                settings.POINTS[index + settings.PARAMETERS.K_PTS + 1]) > settings.PARAMETERS.LENGTH1);
+                (index) -> settings.POINTS[index].distance(
+                        settings.POINTS[index + settings.PARAMETERS.K_PTS + 1]) > settings.PARAMETERS.LENGTH1);
     }
 
     public boolean condition8() {
@@ -69,10 +72,10 @@ public class Decide {
     public boolean condition10() {
         return settings.NUMPOINTS >= 5 && IntStream.range(0, settings.NUMPOINTS - 2 - settings.PARAMETERS.E_PTS -
                 settings.PARAMETERS.F_PTS).anyMatch(
-                        (index) -> (Point.triangleArea(settings.POINTS[index],
-                                settings.POINTS[index + 1 + settings.PARAMETERS.E_PTS],
-                                settings.POINTS[index + 1 + settings.PARAMETERS.E_PTS + 1 + settings.PARAMETERS.F_PTS])
-                                > settings.PARAMETERS.AREA1));
+                (index) -> (Point.triangleArea(settings.POINTS[index],
+                        settings.POINTS[index + 1 + settings.PARAMETERS.E_PTS],
+                        settings.POINTS[index + 1 + settings.PARAMETERS.E_PTS + 1 + settings.PARAMETERS.F_PTS])
+                        > settings.PARAMETERS.AREA1));
     }
 
     public boolean condition11() {
