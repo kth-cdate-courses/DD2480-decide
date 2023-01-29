@@ -116,7 +116,10 @@ public class Decide {
     }
 
     public boolean condition14() {
-        return true;
+        Predicate<Double> areaIsLessThanArea2 = a -> (a < settings.PARAMETERS.AREA2);
+        Predicate<Double> areaIsGreaterThanArea1 = a -> (a > settings.PARAMETERS.AREA1);
+        return settings.NUMPOINTS >= 5 && spacedTriangleGivenAreaConstraintExists(areaIsLessThanArea2) &&
+                spacedTriangleGivenAreaConstraintExists(areaIsGreaterThanArea1);
     }
 
     private boolean spacedTriangleGivenAreaConstraintExists(Predicate<Double> areaConstraint) {
