@@ -76,5 +76,18 @@ public class InitialSettings {
         public static double triangleArea(Point p1, Point p2, Point p3) {
             return Math.abs(p1.x * (p2.y - p3.y) + p2.x * (p3.y - p1.y) + p3.x * (p1.y - p2.y)) / 2.0;
         }
+
+        /**
+         * Computes the angle from which Point p is the vertex.
+         * @param p2 first outer point of the angle
+         * @param p3 second outer point of the angle
+         * @return the angle formed by (p,p2) and (p,p3) in rad
+         */
+        public double angle(Point p2, Point p3) {
+            double scalarProduct = (p2.x - x) * (p3.x - x) + (p2.y - y) * (p3.y - y);
+            return Math.acos(scalarProduct / (distance(p2) * distance(p3)));
+        }
+
+
     }
 }
