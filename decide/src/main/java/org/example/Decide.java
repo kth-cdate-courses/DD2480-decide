@@ -18,7 +18,7 @@ public class Decide {
     public Boolean[] getConditionMetVector() {
         // Create a list of booleans, one for each LIC
         // For each LIC, check if it is true or false
-        return new Boolean[] {
+        return new Boolean[]{
                 condition0(),
                 condition1(),
                 condition2(),
@@ -37,8 +37,26 @@ public class Decide {
         };
     }
 
+    public Boolean[][] computePreliminaryUnlockingMatrix(Boolean[] conditionMetVector) {
+        Boolean[][] preliminaryUnlockingMatrix = new Boolean[15][15];
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j <= i; j++) {
+                boolean b = false;
+                switch (settings.LCM[i][j]) {
+                    case NOT_USED -> b = true;
+                    case AND -> b = conditionMetVector[i] && conditionMetVector[j];
+                    case OR -> b = conditionMetVector[i] || conditionMetVector[j];
+                }
+                preliminaryUnlockingMatrix[i][j] = b;
+                preliminaryUnlockingMatrix[j][i] = b;
+            }
+        }
+        return preliminaryUnlockingMatrix;
+    }
+
     public boolean decideHelper() {
         final Boolean[] conditionMetVector = getConditionMetVector();
+        final Boolean[][] preliminaryUnlockingMatrix = computePreliminaryUnlockingMatrix(conditionMetVector);
         return true;
     }
 
