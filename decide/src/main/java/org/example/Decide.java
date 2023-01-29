@@ -39,7 +39,9 @@ public class Decide {
 
     public boolean decideHelper() {
         final Boolean[] conditionMetVector = getConditionMetVector();
-        return true;
+        return IntStream.range(0, conditionMetVector.length).allMatch(
+                (index) -> conditionMetVector[index]
+        );
     }
 
     public boolean condition0() {
