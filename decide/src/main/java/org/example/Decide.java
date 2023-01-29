@@ -2,7 +2,6 @@ package org.example;
 
 import java.util.Arrays;
 import java.util.stream.IntStream;
-import org.example.InitialSettings.Point;
 
 public class Decide {
 
