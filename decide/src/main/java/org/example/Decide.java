@@ -75,36 +75,27 @@ public class Decide {
 
     public boolean condition6() {
         Function<Integer, Point> getStart = (index) -> settings.POINTS[index];
-        Function<Integer, Point> getEnd = (index) -> settings.POINTS[index + settings.PARAMETERS.N_PTS];
+        Function<Integer, Point> getEnd = (index) -> settings.POINTS[index + settings.PARAMETERS.N_PTS - 1];
         double DIST = settings.PARAMETERS.DIST;
 
         return settings.NUMPOINTS >= 3
                 && IntStream.range(0, settings.NUMPOINTS - settings.PARAMETERS.N_PTS)
                         .anyMatch((index) -> settings.POINTS[index]
-                                .isEqualTo(settings.POINTS[index + settings.PARAMETERS.N_PTS])
-                                        ? IntStream.range(index + 1, index + settings.PARAMETERS.N_PTS).reduce(0, (
+                                .isEqualTo(settings.POINTS[index + settings.PARAMETERS.N_PTS - 1])
+                                        // Index + 1 because we choose the first point as the coincident point
+                                        ? IntStream.range(index + 1, index + settings.PARAMETERS.N_PTS - 1).reduce(0, (
                                                 total,
                                                 currentIndex) -> (int) (total + Math.round(settings.POINTS[index] // ! Rounding here could pose a problem, depending on accuracy it should be fine
                                                         .distance(settings.POINTS[currentIndex])))) > DIST
-                                        : Arrays.stream(settings.POINTS, index, index + settings.PARAMETERS.N_PTS)
+                                        : Arrays.stream(settings.POINTS, index, index + settings.PARAMETERS.N_PTS - 1)
                                                 .anyMatch(
                                                         (currentPoint) -> (currentPoint
                                                                 // Check distance from line
                                                                 .getIntersectPoint(getStart.apply(index),
                                                                         getEnd.apply(index))
                                                                 .distance(
-                                                                        currentPoint) > DIST
-                                                                // If too close to line it might still be
-                                                                // fine if the point is not between p2 and p3
-                                                                || currentPoint.x > getStart.apply(index).x
-                                                                        && currentPoint.x > getEnd.apply(index).x
-                                                                || currentPoint.x < getStart.apply(index).x
-                                                                        && currentPoint.x < getEnd.apply(index).x)
-                                                                // Check distance from point to start and end
-                                                                && currentPoint.distance(
-                                                                        getStart.apply(index)) > DIST
-                                                                && currentPoint
-                                                                        .distance(getEnd.apply(index)) > DIST));
+                                                                        currentPoint) > DIST)));
+                                                               
     }
 
     public boolean condition7() {
