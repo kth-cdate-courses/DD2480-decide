@@ -19,6 +19,7 @@ public class Point {
 
     /**
      * Computes the angle from which Point p is the vertex.
+     *
      * @param p2 first outer point of the angle
      * @param p3 second outer point of the angle
      * @return the angle formed by (p,p2) and (p,p3) in rad
@@ -35,6 +36,7 @@ public class Point {
      * Else:
      * the smallest circle is the circumscribed circle.
      * the radius is computed with the formula : R = a * b * c / (4 * S)
+     *
      * @param p1 first point
      * @param p2 second point
      * @param p3 third point
@@ -43,13 +45,13 @@ public class Point {
     public static double smallestCircleRadius(Point p1, Point p2, Point p3) {
         // checking if any of the angles is obtuse
         if (p1.angle(p2, p3) > Math.PI / 2) {
-            return (p2.distance(p3)/2);
+            return (p2.distance(p3) / 2);
         }
         if (p2.angle(p1, p3) > Math.PI / 2) {
-            return (p1.distance(p3)/2);
+            return (p1.distance(p3) / 2);
         }
         if (p3.angle(p1, p2) > Math.PI / 2) {
-            return (p1.distance(p2)/2);
+            return (p1.distance(p2) / 2);
         }
         // else, computing the radius of the circumscribed circle
         else {
@@ -57,4 +59,25 @@ public class Point {
         }
     }
 
+    /**
+     * Determines the quadrant in which the point is set.
+     * Priority is given to the first quadrant in the order I, II, III, IV in case of ambiguity.
+     * @return int representing the quadrant I, II, III or IV
+     */
+    public int quadrant() {
+        if (x >= 0) {
+            if (y >= 0) {
+                return 1;
+            } else {
+                return 2;
+            }
+        } else {
+            if (y < 0) {
+                return 3;
+            } else {
+                return 4;
+            }
+        }
+    }
 }
+
