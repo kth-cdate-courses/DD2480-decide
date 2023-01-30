@@ -207,7 +207,7 @@ class DecideTest {
         boolean[] puvNotUsed = new boolean[15];
         InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
         Decide decide = new Decide(settings);
-        assertTrue(decide.condition8());
+        assertTrue(decide.condition7());
     }
 
     @Test
@@ -219,7 +219,7 @@ class DecideTest {
         boolean[] puvNotUsed = new boolean[15];
         InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
         Decide decide = new Decide(settings);
-        assertFalse(decide.condition8());
+        assertFalse(decide.condition7());
     }
 
     @Test
