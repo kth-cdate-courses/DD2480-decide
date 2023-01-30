@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.Arrays;
+import java.util.function.Predicate;
 import java.util.stream.IntStream;
 
 public class Decide {
@@ -119,7 +120,20 @@ public class Decide {
     }
 
     public boolean condition14() {
-        return true;
+        Predicate<Double> areaIsLessThanArea2 = a -> (a < settings.PARAMETERS.AREA2);
+        Predicate<Double> areaIsGreaterThanArea1 = a -> (a > settings.PARAMETERS.AREA1);
+        return settings.NUMPOINTS >= 5 && spacedTriangleGivenAreaConstraintExists(areaIsLessThanArea2) &&
+                spacedTriangleGivenAreaConstraintExists(areaIsGreaterThanArea1);
+    }
+
+    private boolean spacedTriangleGivenAreaConstraintExists(Predicate<Double> areaConstraint) {
+        return IntStream.range(0, settings.NUMPOINTS - 2 - settings.PARAMETERS.E_PTS -
+                settings.PARAMETERS.F_PTS).anyMatch(
+                (index) -> areaConstraint.test(
+                        Point.triangleArea(settings.POINTS[index],
+                        settings.POINTS[index + 1 + settings.PARAMETERS.E_PTS],
+                        settings.POINTS[index + 1 + settings.PARAMETERS.E_PTS + 1 + settings.PARAMETERS.F_PTS])
+                ));
     }
 
 }
