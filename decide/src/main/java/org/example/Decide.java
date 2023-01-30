@@ -40,7 +40,11 @@ public class Decide {
 
     public boolean decideHelper() {
         final Boolean[] conditionMetVector = getConditionMetVector();
-        return true;
+        return validateFUV(new Boolean[]{});
+    }
+
+    public boolean validateFUV(Boolean[] finalUnlockingVector) {
+        return Arrays.stream(finalUnlockingVector).allMatch((conditionMet) -> conditionMet);
     }
 
     public boolean condition0() {
