@@ -90,7 +90,10 @@ public class Decide {
     }
 
     public boolean condition4() {
-        return true;
+        return IntStream.range(0, settings.NUMPOINTS - settings.PARAMETERS.Q_PTS).anyMatch(
+                (index) -> Point.quadrantRepartition(
+                        Arrays.copyOfRange(settings.POINTS, index, index + settings.PARAMETERS.Q_PTS),
+                        settings.PARAMETERS.QUADS));
     }
 
     public boolean condition5() {
