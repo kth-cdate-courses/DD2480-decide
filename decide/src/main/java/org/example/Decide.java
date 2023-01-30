@@ -45,7 +45,7 @@ public class Decide {
                     case NOT_USED -> true;
                     case AND -> conditionMetVector[i] && conditionMetVector[j];
                     case OR -> conditionMetVector[i] || conditionMetVector[j];
-                }
+                };
                 preliminaryUnlockingMatrix[i][j] = b;
                 preliminaryUnlockingMatrix[j][i] = b;
             }
