@@ -74,7 +74,8 @@ public class Decide {
     }
 
     public boolean condition5() {
-        return true;
+        return IntStream.range(0, settings.NUMPOINTS - 1).anyMatch(
+                (index) -> settings.POINTS[index + 1].x - settings.POINTS[index].x < 0;
     }
 
     public boolean condition6() {
