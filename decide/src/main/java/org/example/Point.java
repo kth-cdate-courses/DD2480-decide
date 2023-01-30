@@ -79,5 +79,25 @@ public class Point {
             }
         }
     }
+
+    /**
+     * Returns a boolean stating whether a set of POINTS lie in more than QUADS quadrants.
+     * We interpret "more" in a strict way.
+     * @param points collection of points
+     * @param quads number of quadrants
+     * @return true if the points lie in strictly more than QUADS quadrants, else false
+     */
+    public static boolean quadrantRepartition(Point[] points, int quads){
+        boolean[] occupiedQuads = new boolean[4];
+        int quadrantCount = 0;
+        for (Point point : points) {
+            int quad = point.quadrant();
+            if (!occupiedQuads[quad - 1]) {
+                occupiedQuads[quad - 1] = true;
+                quadrantCount += 1;
+            }
+        }
+        return quadrantCount > quads;
+    }
 }
 
