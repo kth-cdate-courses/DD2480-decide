@@ -318,6 +318,31 @@ class DecideTest {
         assertFalse(decide.condition12());
     }
 
+    @Test
+    void condition13_RADIUS1_equals_4_RADIUS2_equals_11_APTS_equals_1_BPTS_equals_1_TRUE() {
+        int numPoints = 5;
+        Point[] points = { new Point(3,0), new Point(0,-1), new Point(0,3), new Point(2, 1), new Point(6,8)};
+        InitialSettings.Parameters parameters = new InitialSettings.Parameters(0, 4, 0, 0, 0, 0, 0, 0, 0, 1 , 1, 0, 0, 0,0, 0, 0, 11, 0);
+        LogicalOperator[][] lcmNotUsed = new LogicalOperator[15][15];
+        boolean[] puvNotUsed = new boolean[15];
+        InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
+        Decide decide = new Decide(settings);
+        assertTrue(decide.condition13());
+    }
+
+    @Test
+    void condition13_RADIUS1_equals_11_RADIUS2_equals_12_APTS_equals_1_BPTS_equals_1_FALSE() {
+        int numPoints = 5;
+        Point[] points = { new Point(3,0), new Point(0,-1), new Point(0,3), new Point(2, 1), new Point(6,8)};
+        InitialSettings.Parameters parameters = new InitialSettings.Parameters(0, 11, 0, 0, 0, 0, 0, 0, 0, 1 , 1, 0, 0, 0,0, 0, 0, 12, 0);
+        LogicalOperator[][] lcmNotUsed = new LogicalOperator[15][15];
+        boolean[] puvNotUsed = new boolean[15];
+        InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
+        Decide decide = new Decide(settings);
+        assertFalse(decide.condition13());
+    }
+
+
 
 
 
