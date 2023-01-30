@@ -70,7 +70,7 @@ public class Point {
         // Get conflict point between p1 and p2
         int k1 = (p3.y - p2.y) / (p3.x - p2.x);
         int m1 = p2.y - k1 * p2.x;
-        int k2 = k1 * -1;
+        int k2 = -1 / k1;
         int m2 = y - k2 * x;
         int x = (m2 - m1) / (k1 - k2);
         int y = k1 * x + m1;
