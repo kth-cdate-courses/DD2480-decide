@@ -174,6 +174,31 @@ class DecideTest {
         assertFalse(decide.condition6());
     }
 
+    @Test
+    void condition7_KPTS_equals_2_LENGTH1_equals_2_exists_points_TRUE() {
+        int numPoints = 5;
+        Point[] points = {new Point(0,0), new Point(0,1), new Point(1,0), new Point(0, -1), new Point(0,5)};
+        InitialSettings.Parameters parameters = new InitialSettings.Parameters(2, 0, 0, 0, 0, 0, 2, 0, 2, 0 , 0, 0, 0, 0,0, 0, 0, 0, 0);
+        LogicalOperator[][] lcmNotUsed = new LogicalOperator[15][15];
+        boolean[] puvNotUsed = new boolean[15];
+        InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
+        Decide decide = new Decide(settings);
+        assertTrue(decide.condition7());
+    }
+
+    @Test
+    void condition7_KPTS_equals_2_LENGTH1_equals_5_doesnt_exists_points_FALSE() {
+        int numPoints = 5;
+        Point[] points = {new Point(0,0), new Point(0,1), new Point(1,0), new Point(0, -1), new Point(0,5)};
+        InitialSettings.Parameters parameters = new InitialSettings.Parameters(5, 0, 0, 0, 0, 0, 2, 0, 2, 0 , 0, 0, 0, 0,0, 0, 0, 0, 0);
+        LogicalOperator[][] lcmNotUsed = new LogicalOperator[15][15];
+        boolean[] puvNotUsed = new boolean[15];
+        InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
+        Decide decide = new Decide(settings);
+        assertFalse(decide.condition7());
+    }
+
+
 
 
 }
