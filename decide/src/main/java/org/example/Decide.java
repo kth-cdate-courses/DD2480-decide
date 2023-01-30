@@ -147,8 +147,17 @@ public class Decide {
         int C_PTS = settings.PARAMETERS.C_PTS;
         int D_PTS = settings.PARAMETERS.D_PTS;
         return settings.NUMPOINTS >= 5 && IntStream.range(0, settings.NUMPOINTS - 2 - C_PTS - D_PTS).anyMatch(
-                (index) -> (POINTS[index + 1 + C_PTS].angle(POINTS[index], POINTS[index + 2 + C_PTS + D_PTS])
-                        > Math.PI - settings.PARAMETERS.EPSILON));
+                (index) -> (!POINTS[index + 1 + C_PTS].isEqualTo(POINTS[index])
+                        && !POINTS[index + 1 + C_PTS].isEqualTo(POINTS[index + 2 + C_PTS + D_PTS]) &&
+                        (
+                                POINTS[index + 1 + C_PTS].angle(POINTS[index], POINTS[index + 2 + C_PTS + D_PTS])
+                                        < Math.PI - settings.PARAMETERS.EPSILON
+                                    ||
+                                POINTS[index + 1 + C_PTS].angle(POINTS[index], POINTS[index + 2 + C_PTS + D_PTS])
+                                        > Math.PI - settings.PARAMETERS.EPSILON
+                        )
+                )
+        );
     }
 
     public boolean condition10() {
