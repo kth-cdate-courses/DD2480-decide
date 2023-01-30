@@ -149,7 +149,9 @@ public class Decide {
     }
 
     public boolean condition11() {
-        return true;
+        return settings.NUMPOINTS >= 3
+                && IntStream.range(0, settings.NUMPOINTS - 1 - settings.PARAMETERS.G_PTS).anyMatch(
+                (index) -> settings.POINTS[index + settings.PARAMETERS.G_PTS + 1].x - settings.POINTS[index].x < 0);
     }
 
     public boolean condition12() {
