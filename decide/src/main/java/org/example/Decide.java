@@ -1,6 +1,8 @@
 package org.example;
 
 import java.util.Arrays;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.IntStream;
 
 public class Decide {
@@ -39,7 +41,11 @@ public class Decide {
 
     public boolean decideHelper() {
         final Boolean[] conditionMetVector = getConditionMetVector();
-        return true;
+        return validateFUV(new Boolean[]{});
+    }
+
+    public boolean validateFUV(Boolean[] finalUnlockingVector) {
+        return Arrays.stream(finalUnlockingVector).allMatch((conditionMet) -> conditionMet);
     }
 
     public boolean condition0() {
@@ -73,7 +79,28 @@ public class Decide {
     }
 
     public boolean condition6() {
-        return true;
+        Function<Integer, Point> getStart = (index) -> settings.POINTS[index];
+        Function<Integer, Point> getEnd = (index) -> settings.POINTS[index + settings.PARAMETERS.N_PTS - 1];
+        double DIST = settings.PARAMETERS.DIST;
+
+        return settings.NUMPOINTS >= 3
+                && IntStream.range(0, settings.NUMPOINTS - settings.PARAMETERS.N_PTS)
+                        .anyMatch((index) -> settings.POINTS[index]
+                                .isEqualTo(settings.POINTS[index + settings.PARAMETERS.N_PTS - 1])
+                                        // Index + 1 because we choose the first point as the coincident point
+                                        ? IntStream.range(index + 1, index + settings.PARAMETERS.N_PTS - 1).reduce(0, (
+                                                total,
+                                                currentIndex) -> (int) (total + Math.round(settings.POINTS[index] // ! Rounding here could pose a problem, depending on accuracy it should be fine
+                                                        .distance(settings.POINTS[currentIndex])))) > DIST
+                                        : Arrays.stream(settings.POINTS, index, index + settings.PARAMETERS.N_PTS - 1)
+                                                .anyMatch(
+                                                        (currentPoint) -> (currentPoint
+                                                                // Check distance from line
+                                                                .getIntersectPoint(getStart.apply(index),
+                                                                        getEnd.apply(index))
+                                                                .distance(
+                                                                        currentPoint) > DIST)));
+                                                               
     }
 
     public boolean condition7() {
@@ -97,12 +124,8 @@ public class Decide {
     }
 
     public boolean condition10() {
-        return settings.NUMPOINTS >= 5 && IntStream.range(0, settings.NUMPOINTS - 2 - settings.PARAMETERS.E_PTS -
-                settings.PARAMETERS.F_PTS).anyMatch(
-                (index) -> (Point.triangleArea(settings.POINTS[index],
-                        settings.POINTS[index + 1 + settings.PARAMETERS.E_PTS],
-                        settings.POINTS[index + 1 + settings.PARAMETERS.E_PTS + 1 + settings.PARAMETERS.F_PTS])
-                        > settings.PARAMETERS.AREA1));
+        Predicate<Double> areaIsGreaterThanArea1 = a -> (a > settings.PARAMETERS.AREA1);
+        return settings.NUMPOINTS >= 5 && spacedTriangleGivenAreaConstraintExists(areaIsGreaterThanArea1);
     }
 
     public boolean condition11() {
@@ -120,7 +143,20 @@ public class Decide {
     }
 
     public boolean condition14() {
-        return true;
+        Predicate<Double> areaIsLessThanArea2 = a -> (a < settings.PARAMETERS.AREA2);
+        Predicate<Double> areaIsGreaterThanArea1 = a -> (a > settings.PARAMETERS.AREA1);
+        return settings.NUMPOINTS >= 5 && spacedTriangleGivenAreaConstraintExists(areaIsLessThanArea2) &&
+                spacedTriangleGivenAreaConstraintExists(areaIsGreaterThanArea1);
+    }
+
+    private boolean spacedTriangleGivenAreaConstraintExists(Predicate<Double> areaConstraint) {
+        return IntStream.range(0, settings.NUMPOINTS - 2 - settings.PARAMETERS.E_PTS -
+                settings.PARAMETERS.F_PTS).anyMatch(
+                (index) -> areaConstraint.test(
+                        Point.triangleArea(settings.POINTS[index],
+                        settings.POINTS[index + 1 + settings.PARAMETERS.E_PTS],
+                        settings.POINTS[index + 1 + settings.PARAMETERS.E_PTS + 1 + settings.PARAMETERS.F_PTS])
+                ));
     }
 
 }
