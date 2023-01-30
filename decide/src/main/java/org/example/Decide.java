@@ -84,7 +84,7 @@ public class Decide {
     }
 
     public boolean condition8() {
-        return settings.NUMPOINTS >= 3
+        return settings.NUMPOINTS >= 5
                 && IntStream.range(0, settings.NUMPOINTS - settings.PARAMETERS.A_PTS - settings.PARAMETERS.B_PTS - 2).anyMatch(
                 (index) -> Point.smallestCircleRadius(settings.POINTS[index],
                         settings.POINTS[index + settings.PARAMETERS.A_PTS + 1],
