@@ -116,7 +116,7 @@ public class Decide {
                 (index) -> Point.smallestCircleRadius(settings.POINTS[index],
                         settings.POINTS[index + settings.PARAMETERS.A_PTS + 1],
                         settings.POINTS[index + settings.PARAMETERS.A_PTS + settings.PARAMETERS.B_PTS + 2])
-                        < settings.PARAMETERS.RADIUS2);
+                        <= settings.PARAMETERS.RADIUS2);
     }
 
     public boolean condition14() {
