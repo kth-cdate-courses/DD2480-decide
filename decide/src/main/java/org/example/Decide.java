@@ -94,7 +94,8 @@ public class Decide {
     }
 
     public boolean condition5() {
-        return true;
+        return IntStream.range(0, settings.NUMPOINTS - 1).anyMatch(
+                (index) -> settings.POINTS[index + 1].x - settings.POINTS[index].x < 0);
     }
 
     public boolean condition6() {
@@ -178,8 +179,8 @@ public class Decide {
                 settings.PARAMETERS.F_PTS).anyMatch(
                 (index) -> areaConstraint.test(
                         Point.triangleArea(settings.POINTS[index],
-                        settings.POINTS[index + 1 + settings.PARAMETERS.E_PTS],
-                        settings.POINTS[index + 1 + settings.PARAMETERS.E_PTS + 1 + settings.PARAMETERS.F_PTS])
+                                settings.POINTS[index + 1 + settings.PARAMETERS.E_PTS],
+                                settings.POINTS[index + 1 + settings.PARAMETERS.E_PTS + 1 + settings.PARAMETERS.F_PTS])
                 ));
     }
 
