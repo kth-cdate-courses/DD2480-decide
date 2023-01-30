@@ -59,6 +59,7 @@ public class Decide {
         final Boolean[] conditionMetVector = getConditionMetVector();
         final Boolean[][] preliminaryUnlockingMatrix = computePreliminaryUnlockingMatrix(conditionMetVector);
         return validateFUV(new Boolean[]{});
+    }
 
 
     public boolean validateFUV(Boolean[] finalUnlockingVector) {
