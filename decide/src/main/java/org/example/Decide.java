@@ -41,11 +41,10 @@ public class Decide {
         Boolean[][] preliminaryUnlockingMatrix = new Boolean[15][15];
         for (int i = 0; i < 15; i++) {
             for (int j = 0; j <= i; j++) {
-                boolean b = false;
-                switch (settings.LCM[i][j]) {
-                    case NOT_USED -> b = true;
-                    case AND -> b = conditionMetVector[i] && conditionMetVector[j];
-                    case OR -> b = conditionMetVector[i] || conditionMetVector[j];
+                boolean b = switch (settings.LCM[i][j]) {
+                    case NOT_USED -> true;
+                    case AND -> conditionMetVector[i] && conditionMetVector[j];
+                    case OR -> conditionMetVector[i] || conditionMetVector[j];
                 }
                 preliminaryUnlockingMatrix[i][j] = b;
                 preliminaryUnlockingMatrix[j][i] = b;
