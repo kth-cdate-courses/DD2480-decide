@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.Arrays;
+import java.util.function.Predicate;
 import java.util.stream.IntStream;
 
 public class Decide {
@@ -15,9 +16,35 @@ public class Decide {
         System.out.println(decideHelper() ? "YES" : "NO");
     }
 
+    public Boolean[] getConditionMetVector() {
+        // Create a list of booleans, one for each LIC
+        // For each LIC, check if it is true or false
+        return new Boolean[] {
+                condition0(),
+                condition1(),
+                condition2(),
+                condition3(),
+                condition4(),
+                condition5(),
+                condition6(),
+                condition7(),
+                condition8(),
+                condition9(),
+                condition10(),
+                condition11(),
+                condition12(),
+                condition13(),
+                condition14()
+        };
+    }
+
     public boolean decideHelper() {
-        // TODO do stuff here
-        return true;
+        final Boolean[] conditionMetVector = getConditionMetVector();
+        return validateFUV(new Boolean[]{});
+    }
+
+    public boolean validateFUV(Boolean[] finalUnlockingVector) {
+        return Arrays.stream(finalUnlockingVector).allMatch((conditionMet) -> conditionMet);
     }
 
     public boolean condition0() {
@@ -26,7 +53,10 @@ public class Decide {
     }
 
     public boolean condition1() {
-        return true;
+        return IntStream.range(0, settings.NUMPOINTS - 2).anyMatch(
+                (index) -> Point.smallestCircleRadius(settings.POINTS[index],
+                        settings.POINTS[index + 1],
+                        settings.POINTS[index + 2]) > settings.PARAMETERS.RADIUS1);
     }
 
     public boolean condition2() {
@@ -54,8 +84,8 @@ public class Decide {
     public boolean condition7() {
         return settings.NUMPOINTS >= 3
                 && IntStream.range(0, settings.NUMPOINTS - settings.PARAMETERS.K_PTS - 1).anyMatch(
-                        (index) -> settings.POINTS[index].distance(
-                                settings.POINTS[index + settings.PARAMETERS.K_PTS + 1]) > settings.PARAMETERS.LENGTH1);
+                (index) -> settings.POINTS[index].distance(
+                        settings.POINTS[index + settings.PARAMETERS.K_PTS + 1]) > settings.PARAMETERS.LENGTH1);
     }
 
     public boolean condition8() {
@@ -67,12 +97,8 @@ public class Decide {
     }
 
     public boolean condition10() {
-        return settings.NUMPOINTS >= 5 && IntStream.range(0, settings.NUMPOINTS - 2 - settings.PARAMETERS.E_PTS -
-                settings.PARAMETERS.F_PTS).anyMatch(
-                        (index) -> (Point.triangleArea(settings.POINTS[index],
-                                settings.POINTS[index + 1 + settings.PARAMETERS.E_PTS],
-                                settings.POINTS[index + 1 + settings.PARAMETERS.E_PTS + 1 + settings.PARAMETERS.F_PTS])
-                                > settings.PARAMETERS.AREA1));
+        Predicate<Double> areaIsGreaterThanArea1 = a -> (a > settings.PARAMETERS.AREA1);
+        return settings.NUMPOINTS >= 5 && spacedTriangleGivenAreaConstraintExists(areaIsGreaterThanArea1);
     }
 
     public boolean condition11() {
@@ -90,7 +116,20 @@ public class Decide {
     }
 
     public boolean condition14() {
-        return true;
+        Predicate<Double> areaIsLessThanArea2 = a -> (a < settings.PARAMETERS.AREA2);
+        Predicate<Double> areaIsGreaterThanArea1 = a -> (a > settings.PARAMETERS.AREA1);
+        return settings.NUMPOINTS >= 5 && spacedTriangleGivenAreaConstraintExists(areaIsLessThanArea2) &&
+                spacedTriangleGivenAreaConstraintExists(areaIsGreaterThanArea1);
+    }
+
+    private boolean spacedTriangleGivenAreaConstraintExists(Predicate<Double> areaConstraint) {
+        return IntStream.range(0, settings.NUMPOINTS - 2 - settings.PARAMETERS.E_PTS -
+                settings.PARAMETERS.F_PTS).anyMatch(
+                (index) -> areaConstraint.test(
+                        Point.triangleArea(settings.POINTS[index],
+                        settings.POINTS[index + 1 + settings.PARAMETERS.E_PTS],
+                        settings.POINTS[index + 1 + settings.PARAMETERS.E_PTS + 1 + settings.PARAMETERS.F_PTS])
+                ));
     }
 
 }
