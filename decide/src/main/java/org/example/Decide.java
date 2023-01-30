@@ -80,7 +80,18 @@ public class Decide {
     }
 
     public boolean condition2() {
-        return true;
+        Point[] POINTS = settings.POINTS;
+        return settings.NUMPOINTS >= 3 && IntStream.range(0, settings.NUMPOINTS - 2).anyMatch(
+                (index) -> (!POINTS[index + 1].isEqualTo(POINTS[index]) && !POINTS[index + 2].isEqualTo(POINTS[index]) &&
+                        (
+                                POINTS[index + 1].angle(POINTS[index], POINTS[index + 2])
+                                        < Math.PI - settings.PARAMETERS.EPSILON
+                                    ||
+                                POINTS[index + 1].angle(POINTS[index], POINTS[index + 2])
+                                        > Math.PI + settings.PARAMETERS.EPSILON
+                        )
+                )
+        );
     }
 
     public boolean condition3() {
