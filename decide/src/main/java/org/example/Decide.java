@@ -19,7 +19,7 @@ public class Decide {
     public Boolean[] getConditionMetVector() {
         // Create a list of booleans, one for each LIC
         // For each LIC, check if it is true or false
-        return new Boolean[] {
+        return new Boolean[]{
                 condition0(),
                 condition1(),
                 condition2(),
@@ -75,7 +75,7 @@ public class Decide {
 
     public boolean condition5() {
         return IntStream.range(0, settings.NUMPOINTS - 1).anyMatch(
-                (index) -> settings.POINTS[index + 1].x - settings.POINTS[index].x < 0;
+                (index) -> settings.POINTS[index + 1].x - settings.POINTS[index].x < 0);
     }
 
     public boolean condition6() {
@@ -132,8 +132,8 @@ public class Decide {
                 settings.PARAMETERS.F_PTS).anyMatch(
                 (index) -> areaConstraint.test(
                         Point.triangleArea(settings.POINTS[index],
-                        settings.POINTS[index + 1 + settings.PARAMETERS.E_PTS],
-                        settings.POINTS[index + 1 + settings.PARAMETERS.E_PTS + 1 + settings.PARAMETERS.F_PTS])
+                                settings.POINTS[index + 1 + settings.PARAMETERS.E_PTS],
+                                settings.POINTS[index + 1 + settings.PARAMETERS.E_PTS + 1 + settings.PARAMETERS.F_PTS])
                 ));
     }
 
