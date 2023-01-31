@@ -17,6 +17,13 @@ public class Decide {
         System.out.println(decideHelper() ? "YES" : "NO");
     }
 
+    public boolean decideHelper() {
+        final Boolean[] conditionMetVector = getConditionMetVector();
+        final Boolean[][] preliminaryUnlockingMatrix = computePreliminaryUnlockingMatrix(conditionMetVector);
+        final Boolean[] finalUnlockingVector = computeFinalUnlockingVector(preliminaryUnlockingMatrix);
+        return validateFUV(finalUnlockingVector);
+    }
+
     public Boolean[] getConditionMetVector() {
         // Create a list of booleans, one for each LIC
         // For each LIC, check if it is true or false
@@ -55,10 +62,16 @@ public class Decide {
         return preliminaryUnlockingMatrix;
     }
 
-    public boolean decideHelper() {
-        final Boolean[] conditionMetVector = getConditionMetVector();
-        final Boolean[][] preliminaryUnlockingMatrix = computePreliminaryUnlockingMatrix(conditionMetVector);
-        return validateFUV(new Boolean[]{});
+    public Boolean[] computeFinalUnlockingVector(Boolean[][] preliminaryUnlockingMatrix) {
+        Boolean[] finalUnlockingVector = new Boolean[15];
+        for (int i = 0; i < 15; i++) {
+            boolean allElementsTrue = true;
+            for (int j = 0; j <= i; j++) {
+                allElementsTrue = allElementsTrue && preliminaryUnlockingMatrix[i][j];
+            }
+            finalUnlockingVector[i] = !settings.PUV[i] || allElementsTrue;
+        }
+        return finalUnlockingVector;
     }
 
 
