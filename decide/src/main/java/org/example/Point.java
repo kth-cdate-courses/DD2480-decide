@@ -110,12 +110,20 @@ public class Point {
      */
     public Point getIntersectPoint(Point p2, Point p3) {
 
+        // If p2 and p3 are the same then 
         if (p2.isEqualTo(p3)) {
             throw new Error("p2 and p3 are the same point");
         }
 
         // Get conflict point between p1 and p2
         int k1 = (p3.y - p2.y) / (p3.x - p2.x);
+
+        // Edge case here when k1 is completely horizontal
+        // That will create a division by 0 if we don't have this check
+        if (k1 == 0) {
+            return new Point(x, p2.y);
+        }
+
         int m1 = p2.y - k1 * p2.x;
         int k2 = -1 / k1;
         int m2 = y - k2 * x;
