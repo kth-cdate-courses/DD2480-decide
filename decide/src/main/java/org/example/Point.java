@@ -49,23 +49,82 @@ public class Point {
      * @return radius of the smallest circle containing p1, p2 and p3
      */
     public static double smallestCircleRadius(Point p1, Point p2, Point p3) {
-            Optional<Double> angle1 = p1.angle(p2, p3);
-            Optional<Double> angle2 = p2.angle(p1, p3);
-            Optional<Double> angle3 = p3.angle(p1, p2);
-            // checking if any of the angles is undefined or obtuse
-            if (angle1.isEmpty() || p1.angle(p2, p3).get() > Math.PI / 2){
-                return (p2.distance(p3) / 2);
+        Optional<Double> angle1 = p1.angle(p2, p3);
+        Optional<Double> angle2 = p2.angle(p1, p3);
+        Optional<Double> angle3 = p3.angle(p1, p2);
+        // checking if any of the angles is undefined or obtuse
+        if (angle1.isEmpty() || p1.angle(p2, p3).get() > Math.PI / 2){
+            return (p2.distance(p3) / 2);
+        }
+        if (angle2.isEmpty() || p2.angle(p1, p3).get() > Math.PI / 2) {
+            return (p1.distance(p3)/2);
+        }
+        if (angle3.isEmpty() ||p3.angle(p1, p2).get() > Math.PI / 2) {
+            return (p1.distance(p2)/2);
+        }
+        // else, computing the radius of the circumscribed circle
+        else {
+            return (p2.distance(p3) * p1.distance(p2) * p1.distance(p3) / (4 * triangleArea(p1, p2, p3)));
+        }
+    }
+
+    /**
+     * Determines the quadrant in which the point is set.
+     * Priority is given to the first quadrant in the order I, II, III, IV in case of ambiguity.
+     * @return int representing the quadrant I, II, III or IV
+     */
+    public int quadrant() {
+        if (x >= 0) {
+            if (y >= 0) {
+                return 1;
+            } else {
+                return 2;
             }
-            if (angle2.isEmpty() || p2.angle(p1, p3).get() > Math.PI / 2) {
-                return (p1.distance(p3)/2);
-            }
-            if (angle3.isEmpty() ||p3.angle(p1, p2).get() > Math.PI / 2) {
-                return (p1.distance(p2)/2);
-            }
-            // else, computing the radius of the circumscribed circle
-            else {
-                return (p2.distance(p3) * p1.distance(p2) * p1.distance(p3) / (4 * triangleArea(p1, p2, p3)));
+        } else {
+            if (y < 0) {
+                return 3;
+            } else {
+                return 4;
             }
         }
+    }
 
+    /**
+     * Returns a boolean stating whether a set of POINTS lie in more than QUADS quadrants.
+     * We interpret "more" in a strict way.
+     * @param points collection of points
+     * @param quads number of quadrants
+     * @return true if the points lie in strictly more than QUADS quadrants, else false
+     */
+    public static boolean quadrantRepartition(Point[] points, int quads){
+        boolean[] occupiedQuads = new boolean[4];
+        int quadrantCount = 0;
+        for (Point point : points) {
+            int quad = point.quadrant();
+            if (!occupiedQuads[quad - 1]) {
+                occupiedQuads[quad - 1] = true;
+                quadrantCount += 1;
+            }
+        }
+        return quadrantCount > quads;
+    }
+
+    public Boolean isEqualTo(Point other) {
+        return x == other.x && y == other.y;
+    }
+
+    /*
+     * Get intersect point between the line formed by p2 -> p3
+     * and the perpendicular line through "this" point.
+     */
+    public Point getIntersectPoint(Point p2, Point p3) {
+        // Get conflict point between p1 and p2
+        int k1 = (p3.y - p2.y) / (p3.x - p2.x);
+        int m1 = p2.y - k1 * p2.x;
+        int k2 = -1 / k1;
+        int m2 = y - k2 * x;
+        int x = (m2 - m1) / (k1 - k2);
+        int y = k1 * x + m1;
+        return new Point(x, y);
+    }
 }
