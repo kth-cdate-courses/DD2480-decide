@@ -80,7 +80,18 @@ public class Decide {
     }
 
     public boolean condition2() {
-        return true;
+        Point[] POINTS = settings.POINTS;
+        return settings.NUMPOINTS >= 3 && IntStream.range(0, settings.NUMPOINTS - 2).anyMatch(
+                (index) -> (!POINTS[index + 1].isEqualTo(POINTS[index]) && !POINTS[index + 2].isEqualTo(POINTS[index]) &&
+                        (
+                                POINTS[index + 1].angle(POINTS[index], POINTS[index + 2])
+                                        < Math.PI - settings.PARAMETERS.EPSILON
+                                    ||
+                                POINTS[index + 1].angle(POINTS[index], POINTS[index + 2])
+                                        > Math.PI + settings.PARAMETERS.EPSILON
+                        )
+                )
+        );
     }
 
     public boolean condition3() {
@@ -143,7 +154,21 @@ public class Decide {
     }
 
     public boolean condition9() {
-        return true;
+        Point[] POINTS = settings.POINTS;
+        int C_PTS = settings.PARAMETERS.C_PTS;
+        int D_PTS = settings.PARAMETERS.D_PTS;
+        return settings.NUMPOINTS >= 5 && IntStream.range(0, settings.NUMPOINTS - 2 - C_PTS - D_PTS).anyMatch(
+                (index) -> (!POINTS[index + 1 + C_PTS].isEqualTo(POINTS[index])
+                        && !POINTS[index + 1 + C_PTS].isEqualTo(POINTS[index + 2 + C_PTS + D_PTS]) &&
+                        (
+                                POINTS[index + 1 + C_PTS].angle(POINTS[index], POINTS[index + 2 + C_PTS + D_PTS])
+                                        < Math.PI - settings.PARAMETERS.EPSILON
+                                    ||
+                                POINTS[index + 1 + C_PTS].angle(POINTS[index], POINTS[index + 2 + C_PTS + D_PTS])
+                                        > Math.PI - settings.PARAMETERS.EPSILON
+                        )
+                )
+        );
     }
 
     public boolean condition10() {
