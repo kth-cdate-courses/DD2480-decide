@@ -270,6 +270,30 @@ class DecideTest {
         assertFalse(decide.condition10());
     }
 
+    @Test
+    void condition11_GPTS_equals_1_exists_such_points_TRUE() {
+        int numPoints = 4;
+        Point[] points = { new Point(1,0), new Point(4,0), new Point(2,0), new Point(3, 0)};
+        InitialSettings.Parameters parameters = new InitialSettings.Parameters(0, 0, 0, 0, 0, 0, 0, 0, 0, 0 , 0, 0, 0, 0,0, 1, 0, 0, 0);
+        LogicalOperator[][] lcmNotUsed = new LogicalOperator[15][15];
+        boolean[] puvNotUsed = new boolean[15];
+        InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
+        Decide decide = new Decide(settings);
+        assertTrue(decide.condition11());
+    }
+
+    @Test
+    void condition11_GPTS_equals_1_exists_no_such_points_FALSE() {
+        int numPoints = 4;
+        Point[] points = { new Point(1,0), new Point(3,0), new Point(2,0), new Point(4, 0)};
+        InitialSettings.Parameters parameters = new InitialSettings.Parameters(0, 0, 0, 0, 0, 0, 0, 0, 0, 0 , 0, 0, 0, 0,0, 1, 0, 0, 0);
+        LogicalOperator[][] lcmNotUsed = new LogicalOperator[15][15];
+        boolean[] puvNotUsed = new boolean[15];
+        InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
+        Decide decide = new Decide(settings);
+        assertFalse(decide.condition11());
+    }
+
 
 
 
