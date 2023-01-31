@@ -109,6 +109,21 @@ public class Point {
      * and the perpendicular line through "this" point.
      */
     public Point getIntersectPoint(Point p2, Point p3) {
+
+        // If p2 and p3 are the same then 
+        if (p2.isEqualTo(p3)) {
+            throw new Error("p2 and p3 are the same point");
+        }
+
+
+        // Edge case here when k1 is completely horizontal (or vertical)
+        // That will create a division by 0 if we don't have this check  
+        if (p3.y == p2.y) {
+            return new Point(x, p2.y);
+        } else if (p3.x == p2.x) {
+            return new Point(p2.x, y);
+        }
+
         // Get conflict point between p1 and p2
         int k1 = (p3.y - p2.y) / (p3.x - p2.x);
         int m1 = p2.y - k1 * p2.x;
