@@ -58,6 +58,7 @@ class DecideTest {
         assertFalse(decide.condition1());
     }
 
+    //Test should resolve to true. Parameters: EPSILON = PI/3. angle between points is PI/2. Test corresponds with LIC 2
     @Test
     void condition2_EPSILON_equals_PI_divided_by_3_angle_is_PI_divided_by_2_TRUE() {
         int numPoints = 3;
@@ -70,6 +71,7 @@ class DecideTest {
         assertTrue(decide.condition2());
     }
 
+    //Test should resolve to false. Parameters: EPSILON = PI. angle between points is PI/2. Test corresponds with LIC 2
     @Test
     void condition2_EPSILON_equals_PI_angle_is_PI_divided_by_2_FALSE() {
         int numPoints = 3;
