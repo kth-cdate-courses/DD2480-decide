@@ -123,7 +123,7 @@ class DecideTest {
         assertTrue(decide.condition4());
     }
 
-    //Test should resolve to true. Parameters: QUADS = 2, Q_PTS = 3. Points exist in 2 quadrants. Test corresponds with LIC 44
+    //Test should resolve to false. Parameters: QUADS = 3, Q_PTS = 3. Points exist in 2 quadrants. Test corresponds with LIC 44
     @Test
     void condition4_QUADS_equals_3_QPTS_equals_3_points_in_2_quadrants_FALSE() {
         int numPoints = 4;
