@@ -100,7 +100,7 @@ public class Decide {
     }
 
     public boolean condition4() {
-        return IntStream.range(0, settings.NUMPOINTS - settings.PARAMETERS.Q_PTS).anyMatch(
+        return IntStream.range(0, settings.NUMPOINTS - settings.PARAMETERS.Q_PTS + 1).anyMatch(
                 (index) -> Point.quadrantRepartition(
                         Arrays.copyOfRange(settings.POINTS, index, index + settings.PARAMETERS.Q_PTS),
                         settings.PARAMETERS.QUADS));
@@ -117,7 +117,7 @@ public class Decide {
         double DIST = settings.PARAMETERS.DIST;
 
         return settings.NUMPOINTS >= 3
-                && IntStream.range(0, settings.NUMPOINTS - settings.PARAMETERS.N_PTS)
+                && IntStream.range(0, settings.NUMPOINTS - settings.PARAMETERS.N_PTS + 1)
                         .anyMatch((index) -> settings.POINTS[index]
                                 .isEqualTo(settings.POINTS[index + settings.PARAMETERS.N_PTS - 1])
                                         // Index + 1 because we choose the first point as the coincident point
@@ -163,8 +163,7 @@ public class Decide {
                                         < Math.PI - settings.PARAMETERS.EPSILON
                                     ||
                                 POINTS[index + 1 + C_PTS].angle(POINTS[index], POINTS[index + 2 + C_PTS + D_PTS]).get()
-                                        > Math.PI - settings.PARAMETERS.EPSILON
-                        )
+                                        > Math.PI - settings.PARAMETERS.EPSILON)
                 );
     }
 
