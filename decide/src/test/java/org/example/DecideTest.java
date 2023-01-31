@@ -84,6 +84,7 @@ class DecideTest {
         assertFalse(decide.condition2());
     }
 
+    //Test should resolve to true. Parameters: AREA1 = 1. max triangle area is 2 (between points 2,3,4). Test corresponds with LIC 3
     @Test
     void condition3_AREA1_equals_1_max_triangle_area_is_2_TRUE() {
         int numPoints = 4;
@@ -96,6 +97,7 @@ class DecideTest {
         assertTrue(decide.condition3());
     }
 
+    //Test should resolve to false. Parameters: AREA1 = 2. max triangle area is 1/2 (between points 1,2,3). Test corresponds with LIC 3
     @Test
     void condition3_AREA1_equals_2_max_triangle_area_is_1_divided_by_2_FALSE() {
         int numPoints = 4;
