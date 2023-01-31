@@ -32,6 +32,7 @@ class DecideTest {
         assertFalse(decide.condition0());
     }
 
+    //Test should resolve to true. Parameters: RADIUS1 = 5. point4 not in circle. Test corresponds with LIC 1
     @Test
     void condition1_RADIUS1_equals_5_with_3_points_not_inside_circle_TRUE() {
         int numPoints = 4;
@@ -44,6 +45,7 @@ class DecideTest {
         assertTrue(decide.condition1());
     }
 
+    //Test should resolve to false. Parameters: RADIUS1 = 5. All points in circle. Test corresponds with LIC 1
     @Test
     void condition1_RADIUS1_equals_5_with_all_points_inside_circle_FALSE() {
         int numPoints = 4;
