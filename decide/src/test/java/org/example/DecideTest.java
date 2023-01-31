@@ -222,6 +222,31 @@ class DecideTest {
         assertFalse(decide.condition8());
     }
 
+    @Test
+    void condition9_EPSILON_equals_PI_over_2_CPTS_equals_1_DPTS_equals_1_exists_points_TRUE() {
+        int numPoints = 5;
+        Point[] points = { new Point(1,0), new Point(2,1), new Point(0,0), new Point(1, 0), new Point(0,-1)};
+        InitialSettings.Parameters parameters = new InitialSettings.Parameters(0, 0, Math.PI/2, 0, 0, 0, 0, 0, 0, 0 , 0, 1, 1, 0,0, 0, 0, 0, 0);
+        LogicalOperator[][] lcmNotUsed = new LogicalOperator[15][15];
+        boolean[] puvNotUsed = new boolean[15];
+        InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
+        Decide decide = new Decide(settings);
+        assertTrue(decide.condition9());
+    }
+
+    @Test
+    void condition9_EPSILON_equals_PI_over_2_CPTS_equals_1_DPTS_equals_1_doesnt_exist_points_FALSE() {
+        int numPoints = 5;
+        Point[] points = {new Point(0,1), new Point(1,1), new Point(0,0), new Point(-1, 0), new Point(1,-1)};
+        InitialSettings.Parameters parameters = new InitialSettings.Parameters(0, 0, Math.PI/2, 0, 0, 0, 0, 0, 0, 0 , 0, 1, 1, 0,0, 0, 0, 0, 0);
+        LogicalOperator[][] lcmNotUsed = new LogicalOperator[15][15];
+        boolean[] puvNotUsed = new boolean[15];
+        InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
+        Decide decide = new Decide(settings);
+        assertFalse(decide.condition9());
+    }
+
+
 
 
 
