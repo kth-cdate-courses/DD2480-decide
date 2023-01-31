@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DecideTest {
 
+    //Test should resolve to true. Parameters: LENGTH1 = 5. Max distances between points are 6. Test corresponds with LIC 0
     @Test
     void condition0_LENGTH1_equals_5_with_two_points_distances_longer_than_5_TRUE() {
         int numPoints = 2;
@@ -18,6 +19,7 @@ class DecideTest {
         assertTrue(decide.condition0());
     }
 
+    //Test should resolve to false. Parameters: LENGTH1 = 5. Max distances between points are 4. Test corresponds with LIC 0
     @Test
     void condition0_LENGTH1_equals_5_with_no_points_distances_longer_than_5_FALSE() {
         int numPoints = 2;
