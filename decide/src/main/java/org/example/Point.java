@@ -115,15 +115,17 @@ public class Point {
             throw new Error("p2 and p3 are the same point");
         }
 
-        // Get conflict point between p1 and p2
-        int k1 = (p3.y - p2.y) / (p3.x - p2.x);
 
-        // Edge case here when k1 is completely horizontal
-        // That will create a division by 0 if we don't have this check
-        if (k1 == 0) {
+        // Edge case here when k1 is completely horizontal (or vertical)
+        // That will create a division by 0 if we don't have this check  
+        if (p3.y == p2.y) {
+            return new Point(p2.x, y);
+        } else if (p3.x == p2.x) {
             return new Point(x, p2.y);
         }
 
+        // Get conflict point between p1 and p2
+        int k1 = (p3.y - p2.y) / (p3.x - p2.x);
         int m1 = p2.y - k1 * p2.x;
         int k2 = -1 / k1;
         int m2 = y - k2 * x;
