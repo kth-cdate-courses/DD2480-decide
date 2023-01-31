@@ -101,7 +101,7 @@ public class Decide {
     }
 
     public boolean condition4() {
-        return IntStream.range(0, settings.NUMPOINTS - settings.PARAMETERS.Q_PTS).anyMatch(
+        return IntStream.range(0, settings.NUMPOINTS - settings.PARAMETERS.Q_PTS + 1).anyMatch(
                 (index) -> Point.quadrantRepartition(
                         Arrays.copyOfRange(settings.POINTS, index, index + settings.PARAMETERS.Q_PTS),
                         settings.PARAMETERS.QUADS));
