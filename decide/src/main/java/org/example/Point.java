@@ -119,9 +119,9 @@ public class Point {
         // Edge case here when k1 is completely horizontal (or vertical)
         // That will create a division by 0 if we don't have this check  
         if (p3.y == p2.y) {
-            return new Point(p2.x, y);
-        } else if (p3.x == p2.x) {
             return new Point(x, p2.y);
+        } else if (p3.x == p2.x) {
+            return new Point(p2.x, y);
         }
 
         // Get conflict point between p1 and p2

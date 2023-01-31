@@ -118,7 +118,7 @@ public class Decide {
         double DIST = settings.PARAMETERS.DIST;
 
         return settings.NUMPOINTS >= 3
-                && IntStream.range(0, settings.NUMPOINTS - settings.PARAMETERS.N_PTS)
+                && IntStream.range(0, settings.NUMPOINTS - settings.PARAMETERS.N_PTS + 1)
                         .anyMatch((index) -> settings.POINTS[index]
                                 .isEqualTo(settings.POINTS[index + settings.PARAMETERS.N_PTS - 1])
                                         // Index + 1 because we choose the first point as the coincident point
