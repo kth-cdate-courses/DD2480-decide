@@ -136,8 +136,8 @@ public class Decide {
                                         // Index + 1 because we choose the first point as the coincident point
                                         ? IntStream.range(index + 1, index + settings.PARAMETERS.N_PTS - 1).reduce(0, (
                                                 total,
-                                                currentIndex) -> (int) (total + Math.round(settings.POINTS[index] // ! Rounding here could pose a problem, depending on accuracy it should be fine
-                                                        .distance(settings.POINTS[currentIndex])))) > DIST
+                                                currentIndex) -> (int) (total + settings.POINTS[index]
+                                                        .distance(settings.POINTS[currentIndex]))) > DIST
                                         : Arrays.stream(settings.POINTS, index, index + settings.PARAMETERS.N_PTS - 1)
                                                 .anyMatch(
                                                         (currentPoint) -> (currentPoint
