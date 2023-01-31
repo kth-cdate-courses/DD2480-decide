@@ -163,7 +163,7 @@ public class Decide {
                                         < Math.PI - settings.PARAMETERS.EPSILON
                                     ||
                                 POINTS[index + 1 + C_PTS].angle(POINTS[index], POINTS[index + 2 + C_PTS + D_PTS]).get()
-                                        > Math.PI - settings.PARAMETERS.EPSILON)
+                                        > Math.PI + settings.PARAMETERS.EPSILON)
                 );
     }
 
