@@ -164,7 +164,7 @@ class DecideTest {
     }
 
     //Test should resolve to true. Parameters: N_PTS = 3, DIST = 2.
-    //Point2 is distance 3 away from line between point2 and point4. Test corresponds with LIC 6
+    //Point3 is distance 3 away from line between point2 and point4. Test corresponds with LIC 6
     @Test
     void condition6_NPTS_equals_3_DIST_equals_2_TRUE() {
         int numPoints = 4;
@@ -177,8 +177,8 @@ class DecideTest {
         assertTrue(decide.condition6());
     }
 
-    //Test should resolve to false. Parameters: N_PTS = 3, DIST = 5.
-    //Point2 is distance 3 away from line between point2 and point4. Test corresponds with LIC 6
+    //Test should resolve to false. Parameters: N_PTS = 3, DIST = 4.
+    //Point3 is distance 3 away from line between point2 and point4. Test corresponds with LIC 6
     @Test
     void condition6_NPTS_equals_3_DIST_equals_4_FALSE() {
         int numPoints = 4;
