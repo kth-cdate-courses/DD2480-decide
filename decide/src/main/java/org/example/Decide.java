@@ -96,6 +96,8 @@ public class Decide {
      * @return true if any three consecutive data points cannot be contained on or within a circle with radius RADIUS1
      */
     public boolean condition1() {
+        if (settings.PARAMETERS.RADIUS1 < 0)
+            return false;
         return IntStream.range(0, settings.NUMPOINTS - 2).anyMatch(
                 (index) -> Point.smallestCircleRadius(settings.POINTS[index],
                         settings.POINTS[index + 1],
