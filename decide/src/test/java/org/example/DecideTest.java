@@ -191,6 +191,8 @@ class DecideTest {
         assertFalse(decide.condition6());
     }
 
+    //Test should resolve to true. Parameters: K_PTS = 2, LENGTH1 = 2.
+    //point2 and point5 separated by distance 4. Test corresponds with LIC 7
     @Test
     void condition7_KPTS_equals_2_LENGTH1_equals_2_exists_points_TRUE() {
         int numPoints = 5;
@@ -203,6 +205,8 @@ class DecideTest {
         assertTrue(decide.condition7());
     }
 
+    //Test should resolve to false. Parameters: K_PTS = 2, LENGTH1 = 5.
+    //no points separated by more than distance 5. Test corresponds with LIC 7
     @Test
     void condition7_KPTS_equals_2_LENGTH1_equals_5_doesnt_exists_points_FALSE() {
         int numPoints = 5;
