@@ -2,11 +2,12 @@ package org.example;
 
 import java.util.Optional;
 
-public class Point {
-    public final int x;
-    public final int y;
 
-    public Point(int x, int y) {
+public class Point {
+    public final double x;
+    public final double y;
+
+    public Point(double x, double y) {
         this.x = x;
         this.y = y;
     }
@@ -110,7 +111,7 @@ public class Point {
     }
 
     public Boolean isEqualTo(Point other) {
-        return x == other.x && y == other.y;
+        return (Math.abs(x - other.x) < 10e-6) && (Math.abs(y - other.y) < 10e-6);
     }
 
     /*
@@ -134,12 +135,12 @@ public class Point {
         }
 
         // Get conflict point between p1 and p2
-        int k1 = (p3.y - p2.y) / (p3.x - p2.x);
-        int m1 = p2.y - k1 * p2.x;
-        int k2 = -1 / k1;
-        int m2 = y - k2 * x;
-        int x = (m2 - m1) / (k1 - k2);
-        int y = k1 * x + m1;
+        double k1 = (p3.y - p2.y) / (p3.x - p2.x);
+        double m1 = p2.y - k1 * p2.x;
+        double k2 = -1 / k1;
+        double m2 = y - k2 * x;
+        double x = (m2 - m1) / (k1 - k2);
+        double y = k1 * x + m1;
         return new Point(x, y);
     }
 }
