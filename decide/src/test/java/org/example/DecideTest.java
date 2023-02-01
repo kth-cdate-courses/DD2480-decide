@@ -163,6 +163,8 @@ class DecideTest {
         assertFalse(decide.condition5());
     }
 
+    //Test should resolve to true. Parameters: N_PTS = 3, DIST = 2.
+    //Point3 is distance 3 away from line between point2 and point4. Test corresponds with LIC 6
     @Test
     void condition6_NPTS_equals_3_DIST_equals_2_TRUE() {
         int numPoints = 4;
@@ -175,6 +177,8 @@ class DecideTest {
         assertTrue(decide.condition6());
     }
 
+    //Test should resolve to false. Parameters: N_PTS = 3, DIST = 4.
+    //Point3 is distance 3 away from line between point2 and point4. Test corresponds with LIC 6
     @Test
     void condition6_NPTS_equals_3_DIST_equals_4_FALSE() {
         int numPoints = 4;
@@ -187,6 +191,8 @@ class DecideTest {
         assertFalse(decide.condition6());
     }
 
+    //Test should resolve to true. Parameters: K_PTS = 2, LENGTH1 = 2.
+    //point2 and point5 separated by distance 4. Test corresponds with LIC 7
     @Test
     void condition7_KPTS_equals_2_LENGTH1_equals_2_exists_points_TRUE() {
         int numPoints = 5;
@@ -199,6 +205,8 @@ class DecideTest {
         assertTrue(decide.condition7());
     }
 
+    //Test should resolve to false. Parameters: K_PTS = 2, LENGTH1 = 5.
+    //no points separated by more than distance 5. Test corresponds with LIC 7
     @Test
     void condition7_KPTS_equals_2_LENGTH1_equals_5_doesnt_exists_points_FALSE() {
         int numPoints = 5;
@@ -211,6 +219,8 @@ class DecideTest {
         assertFalse(decide.condition7());
     }
 
+    //Test should resolve to true. Parameters: RADIUS1 = 2, A_PTS = 1, B_PTS = 1.
+    //point2, point4, and point6 cannot be contained in a circle with radius 2. Test corresponds with LIC 8
     @Test
     void condition8_RADIUS1_equals_2_APTS_equals_1_BPTS_equals_1_exists_points_TRUE() {
         int numPoints = 6;
@@ -223,6 +233,8 @@ class DecideTest {
         assertTrue(decide.condition8());
     }
 
+    //Test should resolve to false. Parameters: RADIUS1 = 2, A_PTS = 1, B_PTS = 1.
+    //all points are grouped together in such a way that condition is never met. Test corresponds with LIC 8
     @Test
     void condition8_RADIUS1_equals_2_APTS_equals_1_BPTS_equals_1_doesnt_exists_points_FALSE() {
         int numPoints = 6;
@@ -235,6 +247,8 @@ class DecideTest {
         assertFalse(decide.condition8());
     }
 
+    //Test should resolve to true. Parameters: EPSILON = PI/3, C_PTS = 1, D_PTS = 1.
+    //angle between point1, point3, and point 5 is PI/2. Test corresponds with LIC 9
     @Test
     void condition9_EPSILON_equals_PI_over_2_CPTS_equals_1_DPTS_equals_1_exists_points_TRUE() {
         int numPoints = 5;
@@ -247,6 +261,8 @@ class DecideTest {
         assertTrue(decide.condition9());
     }
 
+    //Test should resolve to false. Parameters: EPSILON = PI/2, C_PTS = 1, D_PTS = 1.
+    //angle between point1, point3, and point 5 is 2PI/3. Test corresponds with LIC 9
     @Test
     void condition9_EPSILON_equals_PI_over_2_CPTS_equals_1_DPTS_equals_1_doesnt_exist_points_FALSE() {
         int numPoints = 5;
@@ -259,6 +275,8 @@ class DecideTest {
         assertFalse(decide.condition9());
     }
 
+    //Test should resolve to true. Parameters: AREA1 = 1, E_PTS = 1, F_PTS = 1.
+    //triangle with vertexes in point1, point3, and point5 has area 2. Test corresponds with LIC 10
     @Test
     void condition10_AREA1_equals_1_EPTS_equals1_FPTS_equals_1_exist_such_triangle_TRUE() {
         int numPoints = 5;
@@ -271,6 +289,8 @@ class DecideTest {
         assertTrue(decide.condition10());
     }
 
+    //Test should resolve to false. Parameters: AREA1 = 3, E_PTS = 1, F_PTS = 1.
+    //triangle with vertexes in point1, point3, and point5 has area 2. Test corresponds with LIC 10
     @Test
     void condition10_AREA1_equals_3_EPTS_equals1_FPTS_equals_1_exist_no_such_triangle_FALSE() {
         int numPoints = 5;
@@ -283,6 +303,8 @@ class DecideTest {
         assertFalse(decide.condition10());
     }
 
+    //Test should resolve to true. Parameters: G_PTS = 1.
+    //x-value of point2 larger than x-value of point4. Test corresponds with LIC 11
     @Test
     void condition11_GPTS_equals_1_exists_such_points_TRUE() {
         int numPoints = 4;
@@ -295,6 +317,8 @@ class DecideTest {
         assertTrue(decide.condition11());
     }
 
+    //Test should resolve to false. Parameters: G_PTS = 1.
+    //x-values of points separated by G_PTS is always larger for the rightmost point. Test corresponds with LIC 11
     @Test
     void condition11_GPTS_equals_1_exists_no_such_points_FALSE() {
         int numPoints = 4;
@@ -307,6 +331,9 @@ class DecideTest {
         assertFalse(decide.condition11());
     }
 
+    //Test should resolve to true. Parameters: K_PTS = 1, LENGTH1 = 2, LENGTH2 = 3.
+    //point1 and point3 are length 3 apart (greater than LENGTH1), point2 and point4 are length 2 apart (less than LENGTH2).
+    //Test corresponds with LIC 12
     @Test
     void condition12_KPTS_equals_1_LENGTH1_equals_2_LENGTH2_equals_3_exist_such_points_TRUE() {
         int numPoints = 4;
@@ -319,6 +346,9 @@ class DecideTest {
         assertTrue(decide.condition12());
     }
 
+    //Test should resolve to false. Parameters: K_PTS = 1, LENGTH1 = 2, LENGTH2 = 3.
+    //point1 and point3 are length 1 apart (less than LENGTH1), point2 and point4 are length 2 apart (less than LENGTH2).
+    //Test corresponds with LIC 12
     @Test
     void condition12_KPTS_equals_1_LENGTH1_equals_2_LENGTH2_equals_3_exist_no_such_points_FALSE() {
         int numPoints = 4;
