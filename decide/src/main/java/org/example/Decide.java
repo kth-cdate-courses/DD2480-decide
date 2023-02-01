@@ -223,6 +223,13 @@ public class Decide {
                         <= settings.PARAMETERS.RADIUS2);
     }
 
+    /**
+     * Checks LIC 14
+     *
+     * See spec. for more details. Condition 10 is a subset of this.
+     * @return true if there exists triangle with area greater than AREA1 and a triangle with area less than AREA2. Triangles
+     * can be the same. The three points forming a triangle should be separated by first E_PTS and then F_PTS consecutive points.
+     */
     public boolean condition14() {
         Predicate<Double> areaIsLessThanArea2 = a -> (a < settings.PARAMETERS.AREA2);
         Predicate<Double> areaIsGreaterThanArea1 = a -> (a > settings.PARAMETERS.AREA1);
