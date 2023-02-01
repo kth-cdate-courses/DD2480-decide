@@ -494,6 +494,188 @@ class DecideTest {
         assertTrue(decide.decideHelper());
     }
 
+
+    //invalid test length1 = -1
+    @Test
+    void InvalidTestCondition0() {
+        int numPoints = 2;
+        Point[] points = {new Point(0,0), new Point(0,6)};
+        InitialSettings.Parameters parameters = new InitialSettings.Parameters(-1, 0, 0, 0, 0, 0, 0, 0, 0, 0 , 0, 0, 0, 0,0, 0, 0, 0, 0);
+        LogicalOperator[][] lcmNotUsed = new LogicalOperator[15][15];
+        boolean[] puvNotUsed = new boolean[15];
+        InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
+        Decide decide = new Decide(settings);
+        assertFalse(decide.condition0());
+    }
+
+    //invalid test RADIUS1 = -1
+    @Test
+    void InvalidTestCondition1() {
+        int numPoints = 4;
+        Point[] points = {new Point(0,1), new Point(1,0), new Point(0, -1), new Point(5, -12)};
+        InitialSettings.Parameters parameters = new InitialSettings.Parameters(0, -1, 0, 0, 0, 0, 0, 0, 0, 0 , 0, 0, 0, 0,0, 0, 0, 0, 0);
+        LogicalOperator[][] lcmNotUsed = new LogicalOperator[15][15];
+        boolean[] puvNotUsed = new boolean[15];
+        InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
+        Decide decide = new Decide(settings);
+        assertFalse(decide.condition1());
+    }
+
+    //invalid test EPSILON = 2*PI
+    @Test
+    void InvalidTestCondition2() {
+        int numPoints = 3;
+        Point[] points = {new Point(0,1), new Point(0,0), new Point(1, 0)};
+        InitialSettings.Parameters parameters = new InitialSettings.Parameters(0, 0, 2*Math.PI, 0, 0, 0, 0, 0, 0, 0 , 0, 0, 0, 0,0, 0, 0, 0, 0);
+        LogicalOperator[][] lcmNotUsed = new LogicalOperator[15][15];
+        boolean[] puvNotUsed = new boolean[15];
+        InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
+        Decide decide = new Decide(settings);
+        assertFalse(decide.condition2());
+    }
+
+    //invalid test AREA1 = -1
+    @Test
+    void InvalidTestCondition3() {
+        int numPoints = 4;
+        Point[] points = {new Point(1, 2), new Point(0,2), new Point(0,0), new Point(2, 0)};
+        InitialSettings.Parameters parameters = new InitialSettings.Parameters(0, 0, 0, -1, 0, 0, 0, 0, 0, 0 , 0, 0, 0, 0,0, 0, 0, 0, 0);
+        LogicalOperator[][] lcmNotUsed = new LogicalOperator[15][15];
+        boolean[] puvNotUsed = new boolean[15];
+        InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
+        Decide decide = new Decide(settings);
+        assertFalse(decide.condition3());
+    }
+
+    //invalid test QUADS = 4
+    @Test
+    void InvalidTestCondition4() {
+        int numPoints = 4;
+        Point[] points = {new Point(0, 2), new Point(1,1), new Point(1,-1), new Point(-1, -1)};
+        InitialSettings.Parameters parameters = new InitialSettings.Parameters(0, 0, 0, 0, 3, 4, 0, 0, 0, 0 , 0, 0, 0, 0,0, 0, 0, 0, 0);
+        LogicalOperator[][] lcmNotUsed = new LogicalOperator[15][15];
+        boolean[] puvNotUsed = new boolean[15];
+        InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
+        Decide decide = new Decide(settings);
+        assertFalse(decide.condition4());
+    }
+
+    //invalid test dist = -1
+    @Test
+    void InvalidTestCondition6() {
+        int numPoints = 4;
+        Point[] points = {new Point(0,1), new Point(1,0), new Point(4, 1), new Point(1,2)};
+        InitialSettings.Parameters parameters = new InitialSettings.Parameters(0, 0, 0, 0, 0, 0, -1, 3, 0, 0 , 0, 0, 0, 0,0, 0, 0, 0, 0);
+        LogicalOperator[][] lcmNotUsed = new LogicalOperator[15][15];
+        boolean[] puvNotUsed = new boolean[15];
+        InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
+        Decide decide = new Decide(settings);
+        assertFalse(decide.condition6());
+    }
+
+    //invalid test K_PTS = -1
+    @Test
+    void InvalidTestCondition7() {
+        int numPoints = 5;
+        Point[] points = {new Point(0,0), new Point(0,1), new Point(1,0), new Point(0, -1), new Point(0,5)};
+        InitialSettings.Parameters parameters = new InitialSettings.Parameters(2, 0, 0, 0, 0, 0, 2, 0, -1, 0 , 0, 0, 0, 0,0, 0, 0, 0, 0);
+        LogicalOperator[][] lcmNotUsed = new LogicalOperator[15][15];
+        boolean[] puvNotUsed = new boolean[15];
+        InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
+        Decide decide = new Decide(settings);
+        assertFalse(decide.condition7());
+    }
+
+    //invalid input test A PTS+B PTS = 6
+    @Test
+    void InvalidTestCondition8() {
+        int numPoints = 6;
+        Point[] points = {new Point(0,0), new Point(0,0), new Point(0,1), new Point(1,0), new Point(0, -1), new Point(0,6)};
+        InitialSettings.Parameters parameters = new InitialSettings.Parameters(0, 2, 0, 0, 0, 0, 0, 0, 0, 3 , 3, 0, 0, 0,0, 0, 0, 0, 0);
+        LogicalOperator[][] lcmNotUsed = new LogicalOperator[15][15];
+        boolean[] puvNotUsed = new boolean[15];
+        InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
+        Decide decide = new Decide(settings);
+        assertFalse(decide.condition8());
+    }
+
+    //invalid input test  C PTS = -1
+    @Test
+    void InvalidTestCondition9() {
+        int numPoints = 5;
+        Point[] points = { new Point(1,0), new Point(2,1), new Point(0,0), new Point(1, 0), new Point(0,-1)};
+        InitialSettings.Parameters parameters = new InitialSettings.Parameters(0, 0, Math.PI/3, 0, 0, 0, 0, 0, 0, 0 , 0, -1, 1, 0,0, 0, 0, 0, 0);
+        LogicalOperator[][] lcmNotUsed = new LogicalOperator[15][15];
+        boolean[] puvNotUsed = new boolean[15];
+        InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
+        Decide decide = new Decide(settings);
+        assertFalse(decide.condition9());
+    }
+    //invalid input test  E PTS = -1
+    @Test
+    void InvalidTestCondition10() {
+        int numPoints = 5;
+        Point[] points = { new Point(2,0), new Point(1,1), new Point(0,0), new Point(-1, 0), new Point(0,2)};
+        InitialSettings.Parameters parameters = new InitialSettings.Parameters(0, 0, 0, 1, 0, 0, 0, 0, 0, 0 , 0, 0, 0, -1,1, 0, 0, 0, 0);
+        LogicalOperator[][] lcmNotUsed = new LogicalOperator[15][15];
+        boolean[] puvNotUsed = new boolean[15];
+        InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
+        Decide decide = new Decide(settings);
+        assertFalse(decide.condition10());
+    }
+
+    //invalid input test gpts = -1
+    @Test
+    void InvalidTestCondition11() {
+        int numPoints = 4;
+        Point[] points = { new Point(1,0), new Point(4,0), new Point(2,0), new Point(3, 0)};
+        InitialSettings.Parameters parameters = new InitialSettings.Parameters(0, 0, 0, 0, 0, 0, 0, 0, 0, 0 , 0, 0, 0, 0,0, -1, 0, 0, 0);
+        LogicalOperator[][] lcmNotUsed = new LogicalOperator[15][15];
+        boolean[] puvNotUsed = new boolean[15];
+        InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
+        Decide decide = new Decide(settings);
+        assertFalse(decide.condition11());
+    }
+
+    //invalid input test length2 = -1
+    @Test
+    void InvalidTestCondition12() {
+        int numPoints = 4;
+        Point[] points = { new Point(0,0), new Point(2,0), new Point(3,0), new Point(4, 0)};
+        InitialSettings.Parameters parameters = new InitialSettings.Parameters(2, 0, 0, 0, 0, 0, 0, 0, 1, 0 , 0, 0, 0, 0,0, 0, -1, 0, 0);
+        LogicalOperator[][] lcmNotUsed = new LogicalOperator[15][15];
+        boolean[] puvNotUsed = new boolean[15];
+        InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
+        Decide decide = new Decide(settings);
+        assertFalse(decide.condition12());
+    }
+
+    //invalid input test RADIUS2 = -1
+    @Test
+    void InvalidTestCondition13() {
+        int numPoints = 5;
+        Point[] points = { new Point(3,0), new Point(0,-1), new Point(0,3), new Point(2, 1), new Point(6,8)};
+        InitialSettings.Parameters parameters = new InitialSettings.Parameters(0, 4, 0, 0, 0, 0, 0, 0, 0, 1 , 1, 0, 0, 0,0, 0, 0, -1, 0);
+        LogicalOperator[][] lcmNotUsed = new LogicalOperator[15][15];
+        boolean[] puvNotUsed = new boolean[15];
+        InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
+        Decide decide = new Decide(settings);
+        assertFalse(decide.condition13());
+    }
+
+    //invalid input test AREA2 = -1
+    @Test
+    void InvalidTestCondition14() {
+        int numPoints = 5;
+        Point[] points = { new Point(2,0), new Point(0,0), new Point(0,0), new Point(0, 0), new Point(0,2)};
+        InitialSettings.Parameters parameters = new InitialSettings.Parameters(0, 0, 0, 1, 0, 0, 0, 0, 0, 1 , 0, 0, 0, 1,1, 0, 0, 0, -1);
+        LogicalOperator[][] lcmNotUsed = new LogicalOperator[15][15];
+        boolean[] puvNotUsed = new boolean[15];
+        InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
+        Decide decide = new Decide(settings);
+        assertFalse(decide.condition14());
+    }
+
 }
 
 
