@@ -275,6 +275,8 @@ class DecideTest {
         assertFalse(decide.condition9());
     }
 
+    //Test should resolve to true. Parameters: AREA1 = 1, E_PTS = 1, F_PTS = 1.
+    //triangle with vertexes in point1, point3, and point5 has area 2. Test corresponds with LIC 10
     @Test
     void condition10_AREA1_equals_1_EPTS_equals1_FPTS_equals_1_exist_such_triangle_TRUE() {
         int numPoints = 5;
@@ -287,6 +289,8 @@ class DecideTest {
         assertTrue(decide.condition10());
     }
 
+    //Test should resolve to false. Parameters: AREA1 = 3, E_PTS = 1, F_PTS = 1.
+    //triangle with vertexes in point1, point3, and point5 has area 2. Test corresponds with LIC 10
     @Test
     void condition10_AREA1_equals_3_EPTS_equals1_FPTS_equals_1_exist_no_such_triangle_FALSE() {
         int numPoints = 5;
