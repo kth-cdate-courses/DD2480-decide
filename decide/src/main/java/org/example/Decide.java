@@ -154,6 +154,8 @@ public class Decide {
     }
 
     public boolean condition6() {
+        if (!(3 <= settings.PARAMETERS.N_PTS && settings.PARAMETERS.N_PTS <= settings.NUMPOINTS && 0 <= settings.PARAMETERS.DIST))
+            return false;
         Function<Integer, Point> getStart = (index) -> settings.POINTS[index];
         Function<Integer, Point> getEnd = (index) -> settings.POINTS[index + settings.PARAMETERS.N_PTS - 1];
         double DIST = settings.PARAMETERS.DIST;
