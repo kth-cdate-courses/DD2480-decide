@@ -59,6 +59,12 @@ public class Decide {
         };
     }
 
+    /**
+     * Takes the Condition Met Vector and computes the Preliminary Unlocking Matrix from it.
+     * For that, uses the Logical Connector Matrix to see how to combine the LICs together.
+     * @param conditionMetVector boolean vector containing the results from all conditions
+     * @return boolean matrix representing the Preliminary Unlocking Matrix
+     */
     public Boolean[][] computePreliminaryUnlockingMatrix(Boolean[] conditionMetVector) {
         Boolean[][] preliminaryUnlockingMatrix = new Boolean[15][15];
         for (int i = 0; i < 15; i++) {
