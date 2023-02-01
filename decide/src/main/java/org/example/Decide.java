@@ -85,6 +85,8 @@ public class Decide {
      * @return true if one or more sets of two consecutive data points a distance greater than LENGTH1 apart exist.
      */
     public boolean condition0() {
+        if (settings.PARAMETERS.LENGTH1 < 0)
+            return false;
         return IntStream.range(0, settings.NUMPOINTS - 1).anyMatch(
                 (index) -> settings.POINTS[index].distance(settings.POINTS[index + 1]) > settings.PARAMETERS.LENGTH1);
     }
