@@ -361,6 +361,9 @@ class DecideTest {
         assertFalse(decide.condition12());
     }
 
+    //Test should resolve to true. Parameters: RADIUS1 = 4, RADIUS2 = 11, A_PTS = 1, B_PTS = 1.
+    //point1, point3, point5 cannot be contained in circle with radius 4, but can be contained within circle with radius 11.
+    //Test corresponds with LIC 13
     @Test
     void condition13_RADIUS1_equals_4_RADIUS2_equals_11_APTS_equals_1_BPTS_equals_1_TRUE() {
         int numPoints = 5;
@@ -373,6 +376,9 @@ class DecideTest {
         assertTrue(decide.condition13());
     }
 
+    //Test should resolve to false. Parameters: RADIUS1 = 11, RADIUS2 = 12, A_PTS = 1, B_PTS = 1.
+    //point1, point3, point5 can be contained in circle with radius 11, and can be contained within circle with radius 12.
+    //Test corresponds with LIC 13
     @Test
     void condition13_RADIUS1_equals_11_RADIUS2_equals_12_APTS_equals_1_BPTS_equals_1_FALSE() {
         int numPoints = 5;
