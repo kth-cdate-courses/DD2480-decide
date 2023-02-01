@@ -31,6 +31,8 @@ root
 
 ### Compile, test and run
 
+Java version:  This project is written for Java 17, but other versions may work as well.
+
 Build the program with:
 `$ mvn compile --file decide/pom.xml`
 
