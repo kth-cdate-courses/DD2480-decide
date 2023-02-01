@@ -221,6 +221,13 @@ public class Decide {
                         settings.POINTS[index + settings.PARAMETERS.K_PTS + 1]) < settings.PARAMETERS.LENGTH2);
     }
 
+    /**
+     * Checks LIC 13
+     *
+     * See spec. for more details. Condition 8 is a subset of this condition.
+     * @return true if set of three points with A_PTS and B_PTS in between cannot be contained on/within circle of radius
+     * RADIUS1 and some three points with same constrains as previously can  be contained on/within circle of radius RADIUS 2
+     */
     public boolean condition13() {
         return condition8()
                 && IntStream.range(0, settings.NUMPOINTS - settings.PARAMETERS.A_PTS - settings.PARAMETERS.B_PTS - 2).anyMatch(
