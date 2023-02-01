@@ -29,7 +29,11 @@ root
 
 ```
 
-### Compile, test and run
+### Use project, compile, test and run
+
+The project is not meant to be run as is, but is mean to be used as a library for other projects. Download the project/source code and use the Decide class in your project to decide if missiles can be sent or not. Create an instance of the class initialized with parameters representing the observed environment (these are specified using an instance of the InitialSettings class), then call the decide() method. The decide() method will then either print out "YES" or "NO". This corresponds to if missles are allowed to be launched or not.  
+
+The project is built using Maven and created using IntelliJ. The easiest way to test the project is therefore probably by using IntelliJ to open up the project and let IntelliJ figure out of the run the tests or run the program. However, it is also possible to use maven to compile/test the project. See info below.  
 
 Java version:  This project is written for Java 17, but other versions may work as well.
 
@@ -38,8 +42,6 @@ Build the program with:
 
 Test the program with:
 `$ mvn test --file decide/pom.xml`
-
-Run the program with:
 
 
 ### Statement of contributions
