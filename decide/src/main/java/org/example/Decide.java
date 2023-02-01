@@ -80,11 +80,19 @@ public class Decide {
 
     }
 
+    /**
+     * Checks LIC 0
+     * @return true if one or more sets of two consecutive data points a distance greater than LENGTH1 apart exist.
+     */
     public boolean condition0() {
         return IntStream.range(0, settings.NUMPOINTS - 1).anyMatch(
                 (index) -> settings.POINTS[index].distance(settings.POINTS[index + 1]) > settings.PARAMETERS.LENGTH1);
     }
 
+    /**
+     * Checks LIC 1
+     * @return true if any three consecutive data points cannot be contained on or within a circle with radius RADIUS1
+     */
     public boolean condition1() {
         return IntStream.range(0, settings.NUMPOINTS - 2).anyMatch(
                 (index) -> Point.smallestCircleRadius(settings.POINTS[index],
@@ -92,6 +100,11 @@ public class Decide {
                         settings.POINTS[index + 2]) > settings.PARAMETERS.RADIUS1);
     }
 
+    /**
+     * Checks LIC 2
+     * @return true if angle formed from three consecutive points (middle point is vertex) is either less than PI-epsilon or
+     * greater than PI + epsilon
+     */
     public boolean condition2() {
         Point[] POINTS = settings.POINTS;
         return settings.NUMPOINTS >= 3 && IntStream.range(0, settings.NUMPOINTS - 2).anyMatch(
@@ -106,6 +119,10 @@ public class Decide {
                 );
     }
 
+    /**
+     * Checks LIC 3
+     * @return true if some three consecutive points form triangle with area greater than AREA1
+     */
     public boolean condition3() {
         return IntStream.range(0, settings.NUMPOINTS - 2).anyMatch(
                 (index) -> Point.triangleArea(settings.POINTS[index], settings.POINTS[index + 1],

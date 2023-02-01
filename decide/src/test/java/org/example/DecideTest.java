@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DecideTest {
 
+    //Test should resolve to true. Parameters: LENGTH1 = 5. Max distances between points are 6. Test corresponds with LIC 0
     @Test
     void condition0_LENGTH1_equals_5_with_two_points_distances_longer_than_5_TRUE() {
         int numPoints = 2;
@@ -18,6 +19,7 @@ class DecideTest {
         assertTrue(decide.condition0());
     }
 
+    //Test should resolve to false. Parameters: LENGTH1 = 5. Max distances between points are 4. Test corresponds with LIC 0
     @Test
     void condition0_LENGTH1_equals_5_with_no_points_distances_longer_than_5_FALSE() {
         int numPoints = 2;
@@ -30,6 +32,7 @@ class DecideTest {
         assertFalse(decide.condition0());
     }
 
+    //Test should resolve to true. Parameters: RADIUS1 = 5. point4 not in circle. Test corresponds with LIC 1
     @Test
     void condition1_RADIUS1_equals_5_with_3_points_not_inside_circle_TRUE() {
         int numPoints = 4;
@@ -42,6 +45,7 @@ class DecideTest {
         assertTrue(decide.condition1());
     }
 
+    //Test should resolve to false. Parameters: RADIUS1 = 5. All points in circle. Test corresponds with LIC 1
     @Test
     void condition1_RADIUS1_equals_5_with_all_points_inside_circle_FALSE() {
         int numPoints = 4;
@@ -54,6 +58,7 @@ class DecideTest {
         assertFalse(decide.condition1());
     }
 
+    //Test should resolve to true. Parameters: EPSILON = PI/3. angle between points is PI/2. Test corresponds with LIC 2
     @Test
     void condition2_EPSILON_equals_PI_divided_by_3_angle_is_PI_divided_by_2_TRUE() {
         int numPoints = 3;
@@ -66,6 +71,7 @@ class DecideTest {
         assertTrue(decide.condition2());
     }
 
+    //Test should resolve to false. Parameters: EPSILON = PI. angle between points is PI/2. Test corresponds with LIC 2
     @Test
     void condition2_EPSILON_equals_PI_angle_is_PI_divided_by_2_FALSE() {
         int numPoints = 3;
@@ -78,6 +84,7 @@ class DecideTest {
         assertFalse(decide.condition2());
     }
 
+    //Test should resolve to true. Parameters: AREA1 = 1. max triangle area is 2 (between points 2,3,4). Test corresponds with LIC 3
     @Test
     void condition3_AREA1_equals_1_max_triangle_area_is_2_TRUE() {
         int numPoints = 4;
@@ -90,6 +97,7 @@ class DecideTest {
         assertTrue(decide.condition3());
     }
 
+    //Test should resolve to false. Parameters: AREA1 = 2. max triangle area is 1/2 (between points 1,2,3). Test corresponds with LIC 3
     @Test
     void condition3_AREA1_equals_2_max_triangle_area_is_1_divided_by_2_FALSE() {
         int numPoints = 4;
