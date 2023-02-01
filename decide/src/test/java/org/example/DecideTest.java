@@ -454,7 +454,7 @@ class DecideTest {
 
     //invalid test length1 = -1
     @Test
-    void InvalidTestCondition1() {
+    void InvalidTestCondition0() {
         int numPoints = 2;
         Point[] points = {new Point(0,0), new Point(0,6)};
         InitialSettings.Parameters parameters = new InitialSettings.Parameters(-1, 0, 0, 0, 0, 0, 0, 0, 0, 0 , 0, 0, 0, 0,0, 0, 0, 0, 0);
