@@ -219,7 +219,7 @@ class DecideTest {
         assertFalse(decide.condition7());
     }
 
-    //Test should resolve to true. Parameters: RADIUS1 = 2, A_PTS = 1, B_PTS = 2.
+    //Test should resolve to true. Parameters: RADIUS1 = 2, A_PTS = 1, B_PTS = 1.
     //point2, point4, and point6 cannot be contained in a circle with radius 2. Test corresponds with LIC 8
     @Test
     void condition8_RADIUS1_equals_2_APTS_equals_1_BPTS_equals_1_exists_points_TRUE() {
@@ -233,7 +233,7 @@ class DecideTest {
         assertTrue(decide.condition8());
     }
 
-    //Test should resolve to false. Parameters: RADIUS1 = 2, A_PTS = 1, B_PTS = 2.
+    //Test should resolve to false. Parameters: RADIUS1 = 2, A_PTS = 1, B_PTS = 1.
     //all points are grouped together in such a way that condition is never met. Test corresponds with LIC 8
     @Test
     void condition8_RADIUS1_equals_2_APTS_equals_1_BPTS_equals_1_doesnt_exists_points_FALSE() {
