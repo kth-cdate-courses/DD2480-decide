@@ -71,23 +71,6 @@ TODO: checklist
 
 TODO: summary of our way of working
 
-### Folder structure
-```
-root  
-├── README.md  
-├── DECIDE  
-│   ├── src  
-│   ├── tests  
-│   └── README.md  
-├── Continuous Integration  
-│   ├── src  
-│   ├── tests  
-│   └── README.md   
-└── Code complexity, coverage  
-	├── src  
-	├── tests  
-	└── README.md   
-```
 
 ### Conventions (suggested)
 Branch namings: `<name>/<type>/<issue-number>-<descriptive branch name>`  
