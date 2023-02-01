@@ -543,6 +543,19 @@ class DecideTest {
         assertTrue(decide.condition7());
     }
 
+    //invalid input test A PTS+B PTS = 6
+    @Test
+    void InvalidTestCondition8() {
+        int numPoints = 6;
+        Point[] points = {new Point(0,0), new Point(0,0), new Point(0,1), new Point(1,0), new Point(0, -1), new Point(0,6)};
+        InitialSettings.Parameters parameters = new InitialSettings.Parameters(0, 2, 0, 0, 0, 0, 0, 0, 0, 3 , 3, 0, 0, 0,0, 0, 0, 0, 0);
+        LogicalOperator[][] lcmNotUsed = new LogicalOperator[15][15];
+        boolean[] puvNotUsed = new boolean[15];
+        InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
+        Decide decide = new Decide(settings);
+        assertTrue(decide.condition8());
+    }
+
 }
 
 
