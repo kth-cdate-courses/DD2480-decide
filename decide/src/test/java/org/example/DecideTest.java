@@ -136,6 +136,7 @@ class DecideTest {
         assertFalse(decide.condition4());
     }
 
+    //Test should resolve to true. Parameters: none. x-value of point 2 larger than x-value of point 3. Test corresponds with LIC 5
     @Test
     void condition5_two_consecutive_points_where_xj_minus_xi_less_than_0_TRUE() {
         int numPoints = 3;
@@ -148,6 +149,8 @@ class DecideTest {
         assertTrue(decide.condition5());
     }
 
+    //Test should resolve to false. Parameters: none.
+    //points ordered such that x-values are in ascending order, so conditions never met. Test corresponds with LIC 5
     @Test
     void condition5_no_consecutive_points_where_xj_minus_xi_less_than_0_FALSE() {
         int numPoints = 3;
