@@ -187,6 +187,13 @@ public class Decide {
                         settings.POINTS[index + settings.PARAMETERS.K_PTS + 1]) > settings.PARAMETERS.LENGTH1);
     }
 
+    /**
+     * Checks LIC 8
+     *
+     * See spec. for more details
+     * @return true if cannot constrain all three points, separated by first A_PTS and then B_PTS points between, on/within
+     * circle of radius RADIUS1
+     */
     public boolean condition8() {
         return settings.NUMPOINTS >= 5
                 && IntStream.range(0, settings.NUMPOINTS - settings.PARAMETERS.A_PTS - settings.PARAMETERS.B_PTS - 2).anyMatch(
