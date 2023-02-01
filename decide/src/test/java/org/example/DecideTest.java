@@ -462,7 +462,7 @@ class DecideTest {
         boolean[] puvNotUsed = new boolean[15];
         InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
         Decide decide = new Decide(settings);
-        assertTrue(decide.condition0());
+        assertFalse(decide.condition0());
     }
 
     //invalid test RADIUS1 = -1
@@ -475,7 +475,7 @@ class DecideTest {
         boolean[] puvNotUsed = new boolean[15];
         InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
         Decide decide = new Decide(settings);
-        assertTrue(decide.condition1());
+        assertFalse(decide.condition1());
     }
 
     //invalid test EPSILON = 2*PI
@@ -488,7 +488,7 @@ class DecideTest {
         boolean[] puvNotUsed = new boolean[15];
         InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
         Decide decide = new Decide(settings);
-        assertTrue(decide.condition2());
+        assertFalse(decide.condition2());
     }
 
     //invalid test AREA1 = -1
@@ -501,7 +501,7 @@ class DecideTest {
         boolean[] puvNotUsed = new boolean[15];
         InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
         Decide decide = new Decide(settings);
-        assertTrue(decide.condition3());
+        assertFalse(decide.condition3());
     }
 
     //invalid test QUADS = 4
@@ -514,7 +514,7 @@ class DecideTest {
         boolean[] puvNotUsed = new boolean[15];
         InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
         Decide decide = new Decide(settings);
-        assertTrue(decide.condition4());
+        assertFalse(decide.condition4());
     }
 
     //invalid test dist = -1
@@ -527,7 +527,7 @@ class DecideTest {
         boolean[] puvNotUsed = new boolean[15];
         InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
         Decide decide = new Decide(settings);
-        assertTrue(decide.condition6());
+        assertFalse(decide.condition6());
     }
 
     //invalid test K_PTS = -1
@@ -540,7 +540,7 @@ class DecideTest {
         boolean[] puvNotUsed = new boolean[15];
         InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
         Decide decide = new Decide(settings);
-        assertTrue(decide.condition7());
+        assertFalse(decide.condition7());
     }
 
     //invalid input test A PTS+B PTS = 6
@@ -553,7 +553,7 @@ class DecideTest {
         boolean[] puvNotUsed = new boolean[15];
         InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
         Decide decide = new Decide(settings);
-        assertTrue(decide.condition8());
+        assertFalse(decide.condition8());
     }
 
     //invalid input test  C PTS = -1
@@ -566,7 +566,7 @@ class DecideTest {
         boolean[] puvNotUsed = new boolean[15];
         InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
         Decide decide = new Decide(settings);
-        assertTrue(decide.condition9());
+        assertFalse(decide.condition9());
     }
     //invalid input test  E PTS = -1
     @Test
@@ -578,7 +578,7 @@ class DecideTest {
         boolean[] puvNotUsed = new boolean[15];
         InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
         Decide decide = new Decide(settings);
-        assertTrue(decide.condition10());
+        assertFalse(decide.condition10());
     }
 
     //invalid input test gpts = -1
@@ -591,7 +591,7 @@ class DecideTest {
         boolean[] puvNotUsed = new boolean[15];
         InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
         Decide decide = new Decide(settings);
-        assertTrue(decide.condition11());
+        assertFalse(decide.condition11());
     }
 
     //invalid input test length2 = -1
@@ -604,7 +604,7 @@ class DecideTest {
         boolean[] puvNotUsed = new boolean[15];
         InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
         Decide decide = new Decide(settings);
-        assertTrue(decide.condition12());
+        assertFalse(decide.condition12());
     }
 
     //invalid input test RADIUS2 = -1
@@ -617,7 +617,7 @@ class DecideTest {
         boolean[] puvNotUsed = new boolean[15];
         InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
         Decide decide = new Decide(settings);
-        assertTrue(decide.condition13());
+        assertFalse(decide.condition13());
     }
 
     //invalid input test AREA2 = -1
@@ -630,7 +630,7 @@ class DecideTest {
         boolean[] puvNotUsed = new boolean[15];
         InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
         Decide decide = new Decide(settings);
-        assertTrue(decide.condition14());
+        assertFalse(decide.condition14());
     }
 
 
