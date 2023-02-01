@@ -331,6 +331,9 @@ class DecideTest {
         assertFalse(decide.condition11());
     }
 
+    //Test should resolve to true. Parameters: K_PTS = 1, LENGTH1 = 2, LENGTH2 = 3.
+    //point1 and point3 are length 3 apart (greater than LENGTH1), point2 and point4 are length 2 apart (less than LENGTH2).
+    //Test corresponds with LIC 12
     @Test
     void condition12_KPTS_equals_1_LENGTH1_equals_2_LENGTH2_equals_3_exist_such_points_TRUE() {
         int numPoints = 4;
@@ -343,6 +346,9 @@ class DecideTest {
         assertTrue(decide.condition12());
     }
 
+    //Test should resolve to false. Parameters: K_PTS = 1, LENGTH1 = 2, LENGTH2 = 3.
+    //point1 and point3 are length 1 apart (less than LENGTH1), point2 and point4 are length 2 apart (less than LENGTH2).
+    //Test corresponds with LIC 12
     @Test
     void condition12_KPTS_equals_1_LENGTH1_equals_2_LENGTH2_equals_3_exist_no_such_points_FALSE() {
         int numPoints = 4;
