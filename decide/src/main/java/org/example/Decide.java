@@ -203,6 +203,13 @@ public class Decide {
                         > settings.PARAMETERS.RADIUS1);
     }
 
+    /**
+     * Checks LIC 9
+     *
+     * See spec. for more details
+     * @return true if three points with first C_PTS and then D_PTS between them (middle is vertex) forms angle fulfills
+     * either angle < PI - epsilon or angle > PI + epsilon
+     */
     public boolean condition9() {
         Point[] POINTS = settings.POINTS;
         int C_PTS = settings.PARAMETERS.C_PTS;
