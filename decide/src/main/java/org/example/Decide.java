@@ -138,6 +138,10 @@ public class Decide {
     }
 
     public boolean condition4() {
+        if (!(2 <= settings.PARAMETERS.Q_PTS && settings.PARAMETERS.Q_PTS <= settings.NUMPOINTS) &&
+                1 <= settings.PARAMETERS.QUADS && settings.PARAMETERS.QUADS <= 3) {
+            return false;
+        }
         return IntStream.range(0, settings.NUMPOINTS - settings.PARAMETERS.Q_PTS + 1).anyMatch(
                 (index) -> Point.quadrantRepartition(
                         Arrays.copyOfRange(settings.POINTS, index, index + settings.PARAMETERS.Q_PTS),
