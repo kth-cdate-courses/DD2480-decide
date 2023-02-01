@@ -421,7 +421,78 @@ class DecideTest {
         assertFalse(decide.condition14());
     }
 
-
+    //Test for whole application, should resolve to TRUE.
+    //Test case designed such that all LICs should be true.
+    //condition0: satisfied by p1, p2. LENGTH1 = 1
+    //condition7: satisfied by p1, p4. LENGTH1 = 1, K_PTS = 2
+    //condition12: satisfied by p1, p4. LENGTH1 = 1, LENGTH2 = 4, K_PTS = 2
+    //condition1: satisfied by p5, p6, p7. RADIUS1 = 1
+    //condition8: satisfied by p5, p7, p9. RADIUS1 = 1, A_PTS = 1, B_PTS = 1
+    //condition13: satisfied by p5, p7, p9. RADIUS1 = 1, RADIUS2 = 3, A_PTS = 1, B_PTS = 1
+    //condition2: satisfied by p10, p11, p12. EPSILON = PI/3
+    //condition9: satisfied by p10, p12, p15. EPSILON = PI/3, C_PTS = 1, D_PTS = 1
+    //condition3: satisfied by p16, p17, p18. AREA1 = 5
+    //condition10: satisfied by p16, p18, p20. AREA1 = 5, E_pts = 1, F_pts = 1
+    //condition14: satisfied by p16, p18, p20. AREA1 = 5, AREA2 = 7, E_pts = 1, F_pts = 1
+    //condition4: satisfied by p21, p22, p23. Q_PTS = 3, QUADS = 2
+    //condition9: satisfied by p24, p25.
+    //condition6: satisfied by p26, p27, p28. DIST = 2, N_PTS = 3
+    //condition11: satisfied by p28, p29. G_PTS = 1
+    @Test
+    void finalTestTrue() {
+        int numPoints = 29;
+        Point p1 = new Point(0,1);
+        Point p2 = new Point(0,3);
+        Point p3 = new Point(100,100);
+        Point p4 = new Point(0,4);
+        Point p5 = new Point(2,0);
+        Point p6 = new Point(0,2);
+        Point p7 = new Point(-2,0);
+        Point p8 = new Point(101,101);
+        Point p9 = new Point(0,-2);
+        Point p10 = new Point(0,5);
+        Point p11 = new Point(0,0);
+        Point p12 = new Point(5,0);
+        Point p13 = new Point(102,102);
+        Point p14 = new Point(10,5);
+        Point p15 = new Point(1,6);
+        Point p16 = new Point(1,0);
+        Point p17 = new Point(7,0);
+        Point p18 = new Point(103,103);
+        Point p19 = new Point(7,6);
+        Point p20 = new Point(8,8);
+        Point p21 = new Point(8,-8);
+        Point p22 = new Point(-8,-8);
+        Point p23 = new Point(10,0);
+        Point p24 = new Point(9,0);
+        Point p25 = new Point(11,0);
+        Point p26 = new Point(14,0);
+        Point p27 = new Point(11,2);
+        Point p28 = new Point(13,0);
+        Point p29 = new Point(12,0);
+        Point[] points = {p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17,p18,p19,p20,p21,p22,p23,p24,p25,p26,p27,p28,p29};
+        InitialSettings.Parameters parameters = new InitialSettings.Parameters(1, 1, Math.PI/3, 5, 3, 2, 2, 3, 2, 1 , 1, 1, 1, 1,1, 1, 4, 3, 7);
+        LogicalOperator[][] lcm = {{LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR},
+                {LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND},
+                {LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR},
+                {LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND},
+                {LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR},
+                {LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND},
+                {LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR},
+                {LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND},
+                {LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR},
+                {LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND},
+                {LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR},
+                {LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND},
+                {LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR},
+                {LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND},
+                {LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR},
+                {LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND, LogicalOperator.OR, LogicalOperator.AND}};
+        boolean[] puv = {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true};
+        InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcm, puv);
+        Decide decide = new Decide(settings);
+        assertTrue(decide.decideHelper());
+    }
 
 }
 
