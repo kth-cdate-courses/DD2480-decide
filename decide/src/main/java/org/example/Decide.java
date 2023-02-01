@@ -238,6 +238,8 @@ public class Decide {
     }
 
     public boolean condition12() {
+        if (!(0 <= settings.PARAMETERS.LENGTH2))
+            return false;
         return condition7() && IntStream.range(0, settings.NUMPOINTS - settings.PARAMETERS.K_PTS - 1).anyMatch(
                 (index) -> settings.POINTS[index].distance(
                         settings.POINTS[index + settings.PARAMETERS.K_PTS + 1]) < settings.PARAMETERS.LENGTH2);
