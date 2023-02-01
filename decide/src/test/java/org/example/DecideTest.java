@@ -303,6 +303,8 @@ class DecideTest {
         assertFalse(decide.condition10());
     }
 
+    //Test should resolve to true. Parameters: G_PTS = 1.
+    //x-value of point2 larger than x-value of point4. Test corresponds with LIC 11
     @Test
     void condition11_GPTS_equals_1_exists_such_points_TRUE() {
         int numPoints = 4;
@@ -315,6 +317,8 @@ class DecideTest {
         assertTrue(decide.condition11());
     }
 
+    //Test should resolve to false. Parameters: G_PTS = 1.
+    //x-values of points separated by G_PTS is always larger for the rightmost point. Test corresponds with LIC 11
     @Test
     void condition11_GPTS_equals_1_exists_no_such_points_FALSE() {
         int numPoints = 4;
