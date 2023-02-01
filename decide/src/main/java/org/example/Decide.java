@@ -180,6 +180,8 @@ public class Decide {
     }
 
     public boolean condition7() {
+        if (!(1 <= settings.PARAMETERS.K_PTS && settings.PARAMETERS.K_PTS <= settings.NUMPOINTS - 2))
+            return false;
         return settings.NUMPOINTS >= 3
                 && IntStream.range(0, settings.NUMPOINTS - settings.PARAMETERS.K_PTS - 1).anyMatch(
                 (index) -> settings.POINTS[index].distance(
