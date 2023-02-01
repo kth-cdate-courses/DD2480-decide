@@ -577,7 +577,7 @@ class DecideTest {
     void InvalidTestCondition7() {
         int numPoints = 5;
         Point[] points = {new Point(0,0), new Point(0,1), new Point(1,0), new Point(0, -1), new Point(0,5)};
-        InitialSettings.Parameters parameters = new InitialSettings.Parameters(2, 0, 0, 0, 0, 0, 2, 0, 2, 0 , 0, 0, 0, 0,0, 0, 0, 0, 0);
+        InitialSettings.Parameters parameters = new InitialSettings.Parameters(2, 0, 0, 0, 0, 0, 2, 0, -1, 0 , 0, 0, 0, 0,0, 0, 0, 0, 0);
         LogicalOperator[][] lcmNotUsed = new LogicalOperator[15][15];
         boolean[] puvNotUsed = new boolean[15];
         InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
