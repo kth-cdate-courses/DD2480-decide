@@ -13,10 +13,19 @@ public class Decide {
         this.settings = settings;
     }
 
+    /**
+     * Main function of the program:
+     * calls the decideHelper function to get decision
+     * prints out the launch decision on the standard output
+     */
     public void decide() {
         System.out.println(decideHelper() ? "YES" : "NO");
     }
 
+    /**
+     * Computes all intermediate results from the conditions up to the final decision.
+     * @return true if the launch is approved
+     */
     public boolean decideHelper() {
         final Boolean[] conditionMetVector = getConditionMetVector();
         final Boolean[][] preliminaryUnlockingMatrix = computePreliminaryUnlockingMatrix(conditionMetVector);
@@ -24,6 +33,10 @@ public class Decide {
         return validateFUV(finalUnlockingVector);
     }
 
+    /**
+     * Calls methods for each of the 15 conditions.
+     * @return boolean vector containing the result of each condition
+     */
     public Boolean[] getConditionMetVector() {
         // Create a list of booleans, one for each LIC
         // For each LIC, check if it is true or false
@@ -46,6 +59,12 @@ public class Decide {
         };
     }
 
+    /**
+     * Takes the Condition Met Vector and computes the Preliminary Unlocking Matrix from it.
+     * For that, uses the Logical Connector Matrix to see how to combine the LICs together.
+     * @param conditionMetVector boolean vector containing the results from all conditions
+     * @return boolean matrix representing the Preliminary Unlocking Matrix
+     */
     public Boolean[][] computePreliminaryUnlockingMatrix(Boolean[] conditionMetVector) {
         Boolean[][] preliminaryUnlockingMatrix = new Boolean[15][15];
         for (int i = 0; i < 15; i++) {
@@ -145,7 +164,6 @@ public class Decide {
 
     /**
      * Checks LIC 4.
-     *
      * See spec. for more details
      * @return true if Q_PTS consecutive points are located in more than QUADS quadrants.
      */
@@ -169,6 +187,12 @@ public class Decide {
                 (index) -> settings.POINTS[index + 1].x - settings.POINTS[index].x < 0);
     }
 
+    /**
+     * Checks LIC 6
+     * See spec. for more on particular cases
+     * @return true if there exists N_PTS consecutive points with one of them
+     * laying further than DIST from the line joining the first and last of the points.
+     */
     public boolean condition6() {
         if (!(3 <= settings.PARAMETERS.N_PTS && settings.PARAMETERS.N_PTS <= settings.NUMPOINTS && 0 <= settings.PARAMETERS.DIST))
             return false;
@@ -211,7 +235,6 @@ public class Decide {
 
     /**
      * Checks LIC 8
-     *
      * See spec. for more details
      * @return true if cannot constrain all three points, separated by first A_PTS and then B_PTS points between, on/within
      * circle of radius RADIUS1
@@ -231,7 +254,6 @@ public class Decide {
 
     /**
      * Checks LIC 9
-     *
      * See spec. for more details
      * @return true if three points with first C_PTS and then D_PTS between them (middle is vertex) forms angle fulfills
      * either angle < PI - epsilon or angle > PI + epsilon
@@ -257,7 +279,6 @@ public class Decide {
 
     /**
      * Checks LIC 10
-     *
      * See spec. for more details
      * @return true if three points separated by E_PTS and F_PTS consecutive points between form triangle with area greater
      * than AREA1
@@ -273,7 +294,6 @@ public class Decide {
 
     /**
      * Checks LIC 11
-     *
      * See spec. for more details
      * @return true if there exists two points Pi and Pj such that i < j, fulfill X[Pi] - X[Pj] < 0,
      * and there are G_PTS between Pi and Pj
@@ -288,7 +308,6 @@ public class Decide {
 
     /**
      * Checks LIC 12
-     *
      * See spec. for more details. This is only a rough overview. Condition 7 is a subset of this condition.
      * @return true if two sets of two points (sets must not be unique) fulfill distance criteria. Points for set 1 should
      * be of distance greater than LENGTH1 and points for set 2 should be of distance less LENGTH2.
@@ -303,7 +322,6 @@ public class Decide {
 
     /**
      * Checks LIC 13
-     *
      * See spec. for more details. Condition 8 is a subset of this condition.
      * @return true if set of three points with A_PTS and B_PTS in between cannot be contained on/within circle of radius
      * RADIUS1 and some three points with same constrains as previously can  be contained on/within circle of radius RADIUS 2
@@ -321,7 +339,6 @@ public class Decide {
 
     /**
      * Checks LIC 14
-     *
      * See spec. for more details. Condition 10 is a subset of this.
      * @return true if there exists triangle with area greater than AREA1 and a triangle with area less than AREA2. Triangles
      * can be the same. The three points forming a triangle should be separated by first E_PTS and then F_PTS consecutive points.
