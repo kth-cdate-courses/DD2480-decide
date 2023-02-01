@@ -175,6 +175,11 @@ public class Decide {
                                                                
     }
 
+    /**
+     * Checks LIC 7
+     * @return true if two points greater than LENGTH1 apart are separated by K_PTS consecutive points in between, and
+     * NUMPOINTS >= 3
+     */
     public boolean condition7() {
         return settings.NUMPOINTS >= 3
                 && IntStream.range(0, settings.NUMPOINTS - settings.PARAMETERS.K_PTS - 1).anyMatch(
