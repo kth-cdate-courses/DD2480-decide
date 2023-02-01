@@ -13,6 +13,11 @@ public class Decide {
         this.settings = settings;
     }
 
+    /**
+     * Main function of the program:
+     * calls the decideHelper function to get decision
+     * prints out the launch decision on the standard output
+     */
     public void decide() {
         System.out.println(decideHelper() ? "YES" : "NO");
     }
