@@ -89,6 +89,10 @@ public class Decide {
                 (index) -> settings.POINTS[index].distance(settings.POINTS[index + 1]) > settings.PARAMETERS.LENGTH1);
     }
 
+    /**
+     * Checks LIC 1
+     * @return true if any three consecutive data points cannot be contained on or within a circle with radius RADIUS1
+     */
     public boolean condition1() {
         return IntStream.range(0, settings.NUMPOINTS - 2).anyMatch(
                 (index) -> Point.smallestCircleRadius(settings.POINTS[index],
