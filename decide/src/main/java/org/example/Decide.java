@@ -130,6 +130,8 @@ public class Decide {
      * @return true if some three consecutive points form triangle with area greater than AREA1
      */
     public boolean condition3() {
+        if (settings.PARAMETERS.AREA1 < 0)
+            return false;
         return IntStream.range(0, settings.NUMPOINTS - 2).anyMatch(
                 (index) -> Point.triangleArea(settings.POINTS[index], settings.POINTS[index + 1],
                         settings.POINTS[index + 2]) > settings.PARAMETERS.AREA1);
