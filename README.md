@@ -9,7 +9,11 @@
 ## Project 1: Launch Interceptor Program
 
 This program is part of an anti-missile system and implements the function DECIDE, which determines whether an interceptor should be
-launched based upon input radar tracking information.
+launched based upon input radar tracking information. The project is an implementation of the following specification: Launch Interceptor Program: Requirements
+Specification
+J. C. Knight and N. G. Leveson
+(adapted by John Regehr and Martin Monperrus)
+June 16, 2016.  
 
 ### Folder structure
 ```
