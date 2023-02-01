@@ -136,6 +136,10 @@ public class Decide {
                         settings.PARAMETERS.QUADS));
     }
 
+    /**
+     * Checks LIC 5
+     * @return true if there are two consecutive points Pi and Pj such that X[Pj] - [Pi] < 0, (i = j - 1)
+     */
     public boolean condition5() {
         return IntStream.range(0, settings.NUMPOINTS - 1).anyMatch(
                 (index) -> settings.POINTS[index + 1].x - settings.POINTS[index].x < 0);
