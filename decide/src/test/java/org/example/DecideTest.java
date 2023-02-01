@@ -110,6 +110,7 @@ class DecideTest {
         assertFalse(decide.condition3());
     }
 
+    //Test should resolve to true. Parameters: QUADS = 2, Q_PTS = 3. Points exist in 3 quadrants. Test corresponds with LIC 4
     @Test
     void condition4_QUADS_equals_2_QPTS_equals_3_points_in_3_quadrants_TRUE() {
         int numPoints = 4;
@@ -122,6 +123,7 @@ class DecideTest {
         assertTrue(decide.condition4());
     }
 
+    //Test should resolve to false. Parameters: QUADS = 3, Q_PTS = 3. Points exist in 2 quadrants. Test corresponds with LIC 4
     @Test
     void condition4_QUADS_equals_3_QPTS_equals_3_points_in_2_quadrants_FALSE() {
         int numPoints = 4;
@@ -134,6 +136,7 @@ class DecideTest {
         assertFalse(decide.condition4());
     }
 
+    //Test should resolve to true. Parameters: none. x-value of point 2 larger than x-value of point 3. Test corresponds with LIC 5
     @Test
     void condition5_two_consecutive_points_where_xj_minus_xi_less_than_0_TRUE() {
         int numPoints = 3;
@@ -146,6 +149,8 @@ class DecideTest {
         assertTrue(decide.condition5());
     }
 
+    //Test should resolve to false. Parameters: none.
+    //points ordered such that x-values are in ascending order, so conditions never met. Test corresponds with LIC 5
     @Test
     void condition5_no_consecutive_points_where_xj_minus_xi_less_than_0_FALSE() {
         int numPoints = 3;
