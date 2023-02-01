@@ -137,6 +137,12 @@ public class Decide {
                         settings.POINTS[index + 2]) > settings.PARAMETERS.AREA1);
     }
 
+    /**
+     * Checks LIC 4.
+     *
+     * See spec. for more details
+     * @return true if Q_PTS consecutive points are located in more than QUADS quadrants.
+     */
     public boolean condition4() {
         if (!(2 <= settings.PARAMETERS.Q_PTS && settings.PARAMETERS.Q_PTS <= settings.NUMPOINTS) &&
                 1 <= settings.PARAMETERS.QUADS && settings.PARAMETERS.QUADS <= 3) {
@@ -148,6 +154,10 @@ public class Decide {
                         settings.PARAMETERS.QUADS));
     }
 
+    /**
+     * Checks LIC 5
+     * @return true if there are two consecutive points Pi and Pj such that X[Pj] - [Pi] < 0, (i = j - 1)
+     */
     public boolean condition5() {
         return IntStream.range(0, settings.NUMPOINTS - 1).anyMatch(
                 (index) -> settings.POINTS[index + 1].x - settings.POINTS[index].x < 0);
@@ -179,6 +189,11 @@ public class Decide {
                                                                
     }
 
+    /**
+     * Checks LIC 7
+     * @return true if two points greater than LENGTH1 apart are separated by K_PTS consecutive points in between, and
+     * NUMPOINTS >= 3
+     */
     public boolean condition7() {
         if (!(1 <= settings.PARAMETERS.K_PTS && settings.PARAMETERS.K_PTS <= settings.NUMPOINTS - 2))
             return false;
@@ -188,6 +203,13 @@ public class Decide {
                         settings.POINTS[index + settings.PARAMETERS.K_PTS + 1]) > settings.PARAMETERS.LENGTH1);
     }
 
+    /**
+     * Checks LIC 8
+     *
+     * See spec. for more details
+     * @return true if cannot constrain all three points, separated by first A_PTS and then B_PTS points between, on/within
+     * circle of radius RADIUS1
+     */
     public boolean condition8() {
         if (!(1 <= settings.PARAMETERS.A_PTS && 1 <= settings.PARAMETERS.B_PTS &&
                 settings.PARAMETERS.A_PTS + settings.PARAMETERS.B_PTS <= settings.NUMPOINTS - 3)) {
@@ -201,6 +223,13 @@ public class Decide {
                         > settings.PARAMETERS.RADIUS1);
     }
 
+    /**
+     * Checks LIC 9
+     *
+     * See spec. for more details
+     * @return true if three points with first C_PTS and then D_PTS between them (middle is vertex) forms angle fulfills
+     * either angle < PI - epsilon or angle > PI + epsilon
+     */
     public boolean condition9() {
         if (!(1 <= settings.PARAMETERS.C_PTS && 1 <= settings.PARAMETERS.D_PTS &&
                 settings.PARAMETERS.C_PTS + settings.PARAMETERS.D_PTS <= settings.NUMPOINTS - 3)) {
@@ -220,6 +249,13 @@ public class Decide {
                 );
     }
 
+    /**
+     * Checks LIC 10
+     *
+     * See spec. for more details
+     * @return true if three points separated by E_PTS and F_PTS consecutive points between form triangle with area greater
+     * than AREA1
+     */
     public boolean condition10() {
         if (!(1 <= settings.PARAMETERS.E_PTS && 1 <= settings.PARAMETERS.F_PTS &&
                 settings.PARAMETERS.E_PTS + settings.PARAMETERS.F_PTS <= settings.NUMPOINTS - 3)) {
@@ -229,6 +265,13 @@ public class Decide {
         return settings.NUMPOINTS >= 5 && spacedTriangleGivenAreaConstraintExists(areaIsGreaterThanArea1);
     }
 
+    /**
+     * Checks LIC 11
+     *
+     * See spec. for more details
+     * @return true if there exists two points Pi and Pj such that i < j, fulfill X[Pi] - X[Pj] < 0,
+     * and there are G_PTS between Pi and Pj
+     */
     public boolean condition11() {
         if (!(1 <= settings.PARAMETERS.G_PTS && settings.PARAMETERS.G_PTS <= settings.NUMPOINTS - 2))
             return false;
@@ -237,6 +280,13 @@ public class Decide {
                 (index) -> settings.POINTS[index + settings.PARAMETERS.G_PTS + 1].x - settings.POINTS[index].x < 0);
     }
 
+    /**
+     * Checks LIC 12
+     *
+     * See spec. for more details. This is only a rough overview. Condition 7 is a subset of this condition.
+     * @return true if two sets of two points (sets must not be unique) fulfill distance criteria. Points for set 1 should
+     * be of distance greater than LENGTH1 and points for set 2 should be of distance less LENGTH2.
+     */
     public boolean condition12() {
         if (!(0 <= settings.PARAMETERS.LENGTH2))
             return false;
@@ -245,6 +295,13 @@ public class Decide {
                         settings.POINTS[index + settings.PARAMETERS.K_PTS + 1]) < settings.PARAMETERS.LENGTH2);
     }
 
+    /**
+     * Checks LIC 13
+     *
+     * See spec. for more details. Condition 8 is a subset of this condition.
+     * @return true if set of three points with A_PTS and B_PTS in between cannot be contained on/within circle of radius
+     * RADIUS1 and some three points with same constrains as previously can  be contained on/within circle of radius RADIUS 2
+     */
     public boolean condition13() {
         if (!(0 <= settings.PARAMETERS.RADIUS2))
             return false;
@@ -256,6 +313,13 @@ public class Decide {
                         <= settings.PARAMETERS.RADIUS2);
     }
 
+    /**
+     * Checks LIC 14
+     *
+     * See spec. for more details. Condition 10 is a subset of this.
+     * @return true if there exists triangle with area greater than AREA1 and a triangle with area less than AREA2. Triangles
+     * can be the same. The three points forming a triangle should be separated by first E_PTS and then F_PTS consecutive points.
+     */
     public boolean condition14() {
         if (!(0 <= settings.PARAMETERS.AREA2))
             return false;
