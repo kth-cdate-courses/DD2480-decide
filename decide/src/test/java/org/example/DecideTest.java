@@ -247,6 +247,8 @@ class DecideTest {
         assertFalse(decide.condition8());
     }
 
+    //Test should resolve to true. Parameters: EPSILON = PI/3, C_PTS = 1, D_PTS = 1.
+    //angle between point1, point3, and point 5 is PI/2. Test corresponds with LIC 9
     @Test
     void condition9_EPSILON_equals_PI_over_2_CPTS_equals_1_DPTS_equals_1_exists_points_TRUE() {
         int numPoints = 5;
@@ -259,6 +261,8 @@ class DecideTest {
         assertTrue(decide.condition9());
     }
 
+    //Test should resolve to false. Parameters: EPSILON = PI/2, C_PTS = 1, D_PTS = 1.
+    //angle between point1, point3, and point 5 is 2PI/3. Test corresponds with LIC 9
     @Test
     void condition9_EPSILON_equals_PI_over_2_CPTS_equals_1_DPTS_equals_1_doesnt_exist_points_FALSE() {
         int numPoints = 5;
