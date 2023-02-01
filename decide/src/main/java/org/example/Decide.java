@@ -202,6 +202,10 @@ public class Decide {
     }
 
     public boolean condition9() {
+        if (!(1 <= settings.PARAMETERS.C_PTS && 1 <= settings.PARAMETERS.D_PTS &&
+                settings.PARAMETERS.C_PTS + settings.PARAMETERS.D_PTS <= settings.NUMPOINTS - 3)) {
+            return false;
+        }
         Point[] POINTS = settings.POINTS;
         int C_PTS = settings.PARAMETERS.C_PTS;
         int D_PTS = settings.PARAMETERS.D_PTS;
