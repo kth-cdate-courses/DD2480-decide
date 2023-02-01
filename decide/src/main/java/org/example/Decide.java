@@ -33,6 +33,10 @@ public class Decide {
         return validateFUV(finalUnlockingVector);
     }
 
+    /**
+     * Calls methods for each of the 15 conditions.
+     * @return boolean vector containing the result of each condition
+     */
     public Boolean[] getConditionMetVector() {
         // Create a list of booleans, one for each LIC
         // For each LIC, check if it is true or false
