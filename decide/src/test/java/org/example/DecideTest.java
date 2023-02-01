@@ -607,6 +607,19 @@ class DecideTest {
         assertTrue(decide.condition12());
     }
 
+    //invalid input test RADIUS2 = -1
+    @Test
+    void InvalidTestCondition13() {
+        int numPoints = 5;
+        Point[] points = { new Point(3,0), new Point(0,-1), new Point(0,3), new Point(2, 1), new Point(6,8)};
+        InitialSettings.Parameters parameters = new InitialSettings.Parameters(0, 4, 0, 0, 0, 0, 0, 0, 0, 1 , 1, 0, 0, 0,0, 0, 0, -1, 0);
+        LogicalOperator[][] lcmNotUsed = new LogicalOperator[15][15];
+        boolean[] puvNotUsed = new boolean[15];
+        InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
+        Decide decide = new Decide(settings);
+        assertTrue(decide.condition13());
+    }
+
 
 }
 
