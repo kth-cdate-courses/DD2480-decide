@@ -92,6 +92,11 @@ public class Decide {
                         settings.POINTS[index + 2]) > settings.PARAMETERS.RADIUS1);
     }
 
+    /**
+     * Checks LIC 2
+     * @return true if angle formed from three consecutive points (middle point is vertex) is either less than PI-epsilon or
+     * greater than PI + epsilon
+     */
     public boolean condition2() {
         Point[] POINTS = settings.POINTS;
         return settings.NUMPOINTS >= 3 && IntStream.range(0, settings.NUMPOINTS - 2).anyMatch(
