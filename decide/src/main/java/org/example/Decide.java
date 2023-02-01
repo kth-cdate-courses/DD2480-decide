@@ -129,6 +129,12 @@ public class Decide {
                         settings.POINTS[index + 2]) > settings.PARAMETERS.AREA1);
     }
 
+    /**
+     * Checks LIC 4.
+     *
+     * See spec. for more details
+     * @return true if Q_PTS consecutive points are located in more than QUADS quadrants.
+     */
     public boolean condition4() {
         return IntStream.range(0, settings.NUMPOINTS - settings.PARAMETERS.Q_PTS + 1).anyMatch(
                 (index) -> Point.quadrantRepartition(
@@ -136,6 +142,10 @@ public class Decide {
                         settings.PARAMETERS.QUADS));
     }
 
+    /**
+     * Checks LIC 5
+     * @return true if there are two consecutive points Pi and Pj such that X[Pj] - [Pi] < 0, (i = j - 1)
+     */
     public boolean condition5() {
         return IntStream.range(0, settings.NUMPOINTS - 1).anyMatch(
                 (index) -> settings.POINTS[index + 1].x - settings.POINTS[index].x < 0);
@@ -151,10 +161,9 @@ public class Decide {
                         .anyMatch((index) -> settings.POINTS[index]
                                 .isEqualTo(settings.POINTS[index + settings.PARAMETERS.N_PTS - 1])
                                         // Index + 1 because we choose the first point as the coincident point
-                                        ? IntStream.range(index + 1, index + settings.PARAMETERS.N_PTS - 1).reduce(0, (
-                                                total,
-                                                currentIndex) -> (int) (total + Math.round(settings.POINTS[index] // ! Rounding here could pose a problem, depending on accuracy it should be fine
-                                                        .distance(settings.POINTS[currentIndex])))) > DIST
+                                        ? IntStream.range(index + 1, index + settings.PARAMETERS.N_PTS - 1).mapToDouble(
+                                                index1 -> settings.POINTS[index1].distance(settings.POINTS[index]))
+                                                .sum() > DIST
                                         : Arrays.stream(settings.POINTS, index, index + settings.PARAMETERS.N_PTS - 1)
                                                 .anyMatch(
                                                         (currentPoint) -> (currentPoint
@@ -166,6 +175,11 @@ public class Decide {
                                                                
     }
 
+    /**
+     * Checks LIC 7
+     * @return true if two points greater than LENGTH1 apart are separated by K_PTS consecutive points in between, and
+     * NUMPOINTS >= 3
+     */
     public boolean condition7() {
         return settings.NUMPOINTS >= 3
                 && IntStream.range(0, settings.NUMPOINTS - settings.PARAMETERS.K_PTS - 1).anyMatch(
