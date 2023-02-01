@@ -110,6 +110,8 @@ public class Decide {
      * greater than PI + epsilon
      */
     public boolean condition2() {
+        if (!(0 <= settings.PARAMETERS.EPSILON && settings.PARAMETERS.EPSILON < Math.PI))
+            return false;
         Point[] POINTS = settings.POINTS;
         return settings.NUMPOINTS >= 3 && IntStream.range(0, settings.NUMPOINTS - 2).anyMatch(
                 (index) -> (POINTS[index + 1].angle(POINTS[index], POINTS[index + 2]).isPresent()) &&
