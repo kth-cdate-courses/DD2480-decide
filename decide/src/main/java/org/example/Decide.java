@@ -75,6 +75,11 @@ public class Decide {
     }
 
 
+    /**
+     * Checks that all the conditions from the Final Unlocking Vector are verified.
+     * @param finalUnlockingVector boolean vector representing the FUV
+     * @return boolean indicating whether all values of FUV are true
+     */
     public boolean validateFUV(Boolean[] finalUnlockingVector) {
         return Arrays.stream(finalUnlockingVector).allMatch((conditionMet) -> conditionMet);
 
