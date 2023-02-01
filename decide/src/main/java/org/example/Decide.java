@@ -208,6 +208,13 @@ public class Decide {
                 (index) -> settings.POINTS[index + settings.PARAMETERS.G_PTS + 1].x - settings.POINTS[index].x < 0);
     }
 
+    /**
+     * Checks LIC 12
+     *
+     * See spec. for more details. This is only a rough overview. Condition 7 is a subset of this condition.
+     * @return true if two sets of two points (sets must not be unique) fulfill distance criteria. Points for set 1 should
+     * be of distance greater than LENGTH1 and points for set 2 should be of distance less LENGTH2.
+     */
     public boolean condition12() {
         return condition7() && IntStream.range(0, settings.NUMPOINTS - settings.PARAMETERS.K_PTS - 1).anyMatch(
                 (index) -> settings.POINTS[index].distance(
