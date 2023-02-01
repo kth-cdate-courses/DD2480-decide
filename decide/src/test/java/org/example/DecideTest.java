@@ -391,6 +391,9 @@ class DecideTest {
         assertFalse(decide.condition13());
     }
 
+    //Test should resolve to true. Parameters: AREA1 = 1, AREA2 = 3, E_PTS = 1, F_PTS = 1.
+    //area of triangle with vertexes in point1, point3 and point5 has area 2, which is greater than AREA1 but smaller than AREA2.
+    //Test corresponds with LIC 14
     @Test
     void condition14_AREA1_equals_1_AREA2_equals_3_EPTS_equals_1_FPTS_equals_1_such_points_exist_TRUE() {
         int numPoints = 5;
@@ -403,6 +406,9 @@ class DecideTest {
         assertTrue(decide.condition14());
     }
 
+    //Test should resolve to false. Parameters: AREA1 = 1, AREA2 = 3, E_PTS = 1, F_PTS = 1.
+    //area of triangle with vertexes in point1, point3 and point5 has area 4, which is greater than AREA1 and greater than AREA2.
+    //Test corresponds with LIC 14
     @Test
     void condition14_AREA1_equals_1_AREA2_equals_3_EPTS_equals_1_FPTS_equals_1_no_such_points_exist_FALSE() {
         int numPoints = 5;
