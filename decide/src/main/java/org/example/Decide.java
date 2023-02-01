@@ -246,6 +246,8 @@ public class Decide {
     }
 
     public boolean condition13() {
+        if (!(0 <= settings.PARAMETERS.RADIUS2))
+            return false;
         return condition8()
                 && IntStream.range(0, settings.NUMPOINTS - settings.PARAMETERS.A_PTS - settings.PARAMETERS.B_PTS - 2).anyMatch(
                 (index) -> Point.smallestCircleRadius(settings.POINTS[index],
