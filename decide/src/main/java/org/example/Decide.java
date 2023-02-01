@@ -85,6 +85,8 @@ public class Decide {
      * @return true if one or more sets of two consecutive data points a distance greater than LENGTH1 apart exist.
      */
     public boolean condition0() {
+        if (settings.PARAMETERS.LENGTH1 < 0)
+            return false;
         return IntStream.range(0, settings.NUMPOINTS - 1).anyMatch(
                 (index) -> settings.POINTS[index].distance(settings.POINTS[index + 1]) > settings.PARAMETERS.LENGTH1);
     }
@@ -94,6 +96,8 @@ public class Decide {
      * @return true if any three consecutive data points cannot be contained on or within a circle with radius RADIUS1
      */
     public boolean condition1() {
+        if (settings.PARAMETERS.RADIUS1 < 0)
+            return false;
         return IntStream.range(0, settings.NUMPOINTS - 2).anyMatch(
                 (index) -> Point.smallestCircleRadius(settings.POINTS[index],
                         settings.POINTS[index + 1],
@@ -106,6 +110,8 @@ public class Decide {
      * greater than PI + epsilon
      */
     public boolean condition2() {
+        if (!(0 <= settings.PARAMETERS.EPSILON && settings.PARAMETERS.EPSILON < Math.PI))
+            return false;
         Point[] POINTS = settings.POINTS;
         return settings.NUMPOINTS >= 3 && IntStream.range(0, settings.NUMPOINTS - 2).anyMatch(
                 (index) -> (POINTS[index + 1].angle(POINTS[index], POINTS[index + 2]).isPresent()) &&
@@ -124,6 +130,8 @@ public class Decide {
      * @return true if some three consecutive points form triangle with area greater than AREA1
      */
     public boolean condition3() {
+        if (settings.PARAMETERS.AREA1 < 0)
+            return false;
         return IntStream.range(0, settings.NUMPOINTS - 2).anyMatch(
                 (index) -> Point.triangleArea(settings.POINTS[index], settings.POINTS[index + 1],
                         settings.POINTS[index + 2]) > settings.PARAMETERS.AREA1);
@@ -136,6 +144,10 @@ public class Decide {
      * @return true if Q_PTS consecutive points are located in more than QUADS quadrants.
      */
     public boolean condition4() {
+        if (!(2 <= settings.PARAMETERS.Q_PTS && settings.PARAMETERS.Q_PTS <= settings.NUMPOINTS) &&
+                1 <= settings.PARAMETERS.QUADS && settings.PARAMETERS.QUADS <= 3) {
+            return false;
+        }
         return IntStream.range(0, settings.NUMPOINTS - settings.PARAMETERS.Q_PTS + 1).anyMatch(
                 (index) -> Point.quadrantRepartition(
                         Arrays.copyOfRange(settings.POINTS, index, index + settings.PARAMETERS.Q_PTS),
@@ -152,6 +164,8 @@ public class Decide {
     }
 
     public boolean condition6() {
+        if (!(3 <= settings.PARAMETERS.N_PTS && settings.PARAMETERS.N_PTS <= settings.NUMPOINTS && 0 <= settings.PARAMETERS.DIST))
+            return false;
         Function<Integer, Point> getStart = (index) -> settings.POINTS[index];
         Function<Integer, Point> getEnd = (index) -> settings.POINTS[index + settings.PARAMETERS.N_PTS - 1];
         double DIST = settings.PARAMETERS.DIST;
@@ -181,6 +195,8 @@ public class Decide {
      * NUMPOINTS >= 3
      */
     public boolean condition7() {
+        if (!(1 <= settings.PARAMETERS.K_PTS && settings.PARAMETERS.K_PTS <= settings.NUMPOINTS - 2))
+            return false;
         return settings.NUMPOINTS >= 3
                 && IntStream.range(0, settings.NUMPOINTS - settings.PARAMETERS.K_PTS - 1).anyMatch(
                 (index) -> settings.POINTS[index].distance(
@@ -195,6 +211,10 @@ public class Decide {
      * circle of radius RADIUS1
      */
     public boolean condition8() {
+        if (!(1 <= settings.PARAMETERS.A_PTS && 1 <= settings.PARAMETERS.B_PTS &&
+                settings.PARAMETERS.A_PTS + settings.PARAMETERS.B_PTS <= settings.NUMPOINTS - 3)) {
+            return false;
+        }
         return settings.NUMPOINTS >= 5
                 && IntStream.range(0, settings.NUMPOINTS - settings.PARAMETERS.A_PTS - settings.PARAMETERS.B_PTS - 2).anyMatch(
                 (index) -> Point.smallestCircleRadius(settings.POINTS[index],
@@ -211,6 +231,10 @@ public class Decide {
      * either angle < PI - epsilon or angle > PI + epsilon
      */
     public boolean condition9() {
+        if (!(1 <= settings.PARAMETERS.C_PTS && 1 <= settings.PARAMETERS.D_PTS &&
+                settings.PARAMETERS.C_PTS + settings.PARAMETERS.D_PTS <= settings.NUMPOINTS - 3)) {
+            return false;
+        }
         Point[] POINTS = settings.POINTS;
         int C_PTS = settings.PARAMETERS.C_PTS;
         int D_PTS = settings.PARAMETERS.D_PTS;
@@ -233,6 +257,10 @@ public class Decide {
      * than AREA1
      */
     public boolean condition10() {
+        if (!(1 <= settings.PARAMETERS.E_PTS && 1 <= settings.PARAMETERS.F_PTS &&
+                settings.PARAMETERS.E_PTS + settings.PARAMETERS.F_PTS <= settings.NUMPOINTS - 3)) {
+            return false;
+        }
         Predicate<Double> areaIsGreaterThanArea1 = a -> (a > settings.PARAMETERS.AREA1);
         return settings.NUMPOINTS >= 5 && spacedTriangleGivenAreaConstraintExists(areaIsGreaterThanArea1);
     }
@@ -245,6 +273,8 @@ public class Decide {
      * and there are G_PTS between Pi and Pj
      */
     public boolean condition11() {
+        if (!(1 <= settings.PARAMETERS.G_PTS && settings.PARAMETERS.G_PTS <= settings.NUMPOINTS - 2))
+            return false;
         return settings.NUMPOINTS >= 3
                 && IntStream.range(0, settings.NUMPOINTS - 1 - settings.PARAMETERS.G_PTS).anyMatch(
                 (index) -> settings.POINTS[index + settings.PARAMETERS.G_PTS + 1].x - settings.POINTS[index].x < 0);
@@ -258,6 +288,8 @@ public class Decide {
      * be of distance greater than LENGTH1 and points for set 2 should be of distance less LENGTH2.
      */
     public boolean condition12() {
+        if (!(0 <= settings.PARAMETERS.LENGTH2))
+            return false;
         return condition7() && IntStream.range(0, settings.NUMPOINTS - settings.PARAMETERS.K_PTS - 1).anyMatch(
                 (index) -> settings.POINTS[index].distance(
                         settings.POINTS[index + settings.PARAMETERS.K_PTS + 1]) < settings.PARAMETERS.LENGTH2);
@@ -271,6 +303,8 @@ public class Decide {
      * RADIUS1 and some three points with same constrains as previously can  be contained on/within circle of radius RADIUS 2
      */
     public boolean condition13() {
+        if (!(0 <= settings.PARAMETERS.RADIUS2))
+            return false;
         return condition8()
                 && IntStream.range(0, settings.NUMPOINTS - settings.PARAMETERS.A_PTS - settings.PARAMETERS.B_PTS - 2).anyMatch(
                 (index) -> Point.smallestCircleRadius(settings.POINTS[index],
@@ -287,6 +321,8 @@ public class Decide {
      * can be the same. The three points forming a triangle should be separated by first E_PTS and then F_PTS consecutive points.
      */
     public boolean condition14() {
+        if (!(0 <= settings.PARAMETERS.AREA2))
+            return false;
         Predicate<Double> areaIsLessThanArea2 = a -> (a < settings.PARAMETERS.AREA2);
         Predicate<Double> areaIsGreaterThanArea1 = a -> (a > settings.PARAMETERS.AREA1);
         return settings.NUMPOINTS >= 5 && spacedTriangleGivenAreaConstraintExists(areaIsLessThanArea2) &&
