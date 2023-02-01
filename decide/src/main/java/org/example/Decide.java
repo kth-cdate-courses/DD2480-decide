@@ -202,6 +202,13 @@ public class Decide {
         return settings.NUMPOINTS >= 5 && spacedTriangleGivenAreaConstraintExists(areaIsGreaterThanArea1);
     }
 
+    /**
+     * Checks LIC 11
+     *
+     * See spec. for more details
+     * @return true if there exists two points Pi and Pj such that i < j, fulfill X[Pi] - X[Pj] < 0,
+     * and there are G_PTS between Pi and Pj
+     */
     public boolean condition11() {
         return settings.NUMPOINTS >= 3
                 && IntStream.range(0, settings.NUMPOINTS - 1 - settings.PARAMETERS.G_PTS).anyMatch(
