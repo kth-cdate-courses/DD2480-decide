@@ -491,6 +491,19 @@ class DecideTest {
         assertTrue(decide.condition2());
     }
 
+    //invalid test AREA1 = -1
+    @Test
+    void InvalidTestCondition3() {
+        int numPoints = 4;
+        Point[] points = {new Point(1, 2), new Point(0,2), new Point(0,0), new Point(2, 0)};
+        InitialSettings.Parameters parameters = new InitialSettings.Parameters(0, 0, 0, -1, 0, 0, 0, 0, 0, 0 , 0, 0, 0, 0,0, 0, 0, 0, 0);
+        LogicalOperator[][] lcmNotUsed = new LogicalOperator[15][15];
+        boolean[] puvNotUsed = new boolean[15];
+        InitialSettings settings = new InitialSettings(numPoints, points, parameters, lcmNotUsed, puvNotUsed);
+        Decide decide = new Decide(settings);
+        assertTrue(decide.condition3());
+    }
+
 }
 
 
