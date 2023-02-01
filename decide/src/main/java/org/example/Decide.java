@@ -197,6 +197,13 @@ public class Decide {
                 );
     }
 
+    /**
+     * Checks LIC 10
+     *
+     * See spec. for more details
+     * @return true if three points separated by E_PTS and F_PTS consecutive points between form triangle with area greater
+     * than AREA1
+     */
     public boolean condition10() {
         Predicate<Double> areaIsGreaterThanArea1 = a -> (a > settings.PARAMETERS.AREA1);
         return settings.NUMPOINTS >= 5 && spacedTriangleGivenAreaConstraintExists(areaIsGreaterThanArea1);
