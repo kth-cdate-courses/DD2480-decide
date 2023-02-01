@@ -17,6 +17,13 @@ public class Decide {
         System.out.println(decideHelper() ? "YES" : "NO");
     }
 
+    public boolean decideHelper() {
+        final Boolean[] conditionMetVector = getConditionMetVector();
+        final Boolean[][] preliminaryUnlockingMatrix = computePreliminaryUnlockingMatrix(conditionMetVector);
+        final Boolean[] finalUnlockingVector = computeFinalUnlockingVector(preliminaryUnlockingMatrix);
+        return validateFUV(finalUnlockingVector);
+    }
+
     public Boolean[] getConditionMetVector() {
         // Create a list of booleans, one for each LIC
         // For each LIC, check if it is true or false
@@ -55,10 +62,16 @@ public class Decide {
         return preliminaryUnlockingMatrix;
     }
 
-    public boolean decideHelper() {
-        final Boolean[] conditionMetVector = getConditionMetVector();
-        final Boolean[][] preliminaryUnlockingMatrix = computePreliminaryUnlockingMatrix(conditionMetVector);
-        return validateFUV(new Boolean[]{});
+    public Boolean[] computeFinalUnlockingVector(Boolean[][] preliminaryUnlockingMatrix) {
+        Boolean[] finalUnlockingVector = new Boolean[15];
+        for (int i = 0; i < 15; i++) {
+            boolean allElementsTrue = true;
+            for (int j = 0; j <= i; j++) {
+                allElementsTrue = allElementsTrue && preliminaryUnlockingMatrix[i][j];
+            }
+            finalUnlockingVector[i] = !settings.PUV[i] || allElementsTrue;
+        }
+        return finalUnlockingVector;
     }
 
 
@@ -67,11 +80,19 @@ public class Decide {
 
     }
 
+    /**
+     * Checks LIC 0
+     * @return true if one or more sets of two consecutive data points a distance greater than LENGTH1 apart exist.
+     */
     public boolean condition0() {
         return IntStream.range(0, settings.NUMPOINTS - 1).anyMatch(
                 (index) -> settings.POINTS[index].distance(settings.POINTS[index + 1]) > settings.PARAMETERS.LENGTH1);
     }
 
+    /**
+     * Checks LIC 1
+     * @return true if any three consecutive data points cannot be contained on or within a circle with radius RADIUS1
+     */
     public boolean condition1() {
         return IntStream.range(0, settings.NUMPOINTS - 2).anyMatch(
                 (index) -> Point.smallestCircleRadius(settings.POINTS[index],
@@ -79,21 +100,29 @@ public class Decide {
                         settings.POINTS[index + 2]) > settings.PARAMETERS.RADIUS1);
     }
 
+    /**
+     * Checks LIC 2
+     * @return true if angle formed from three consecutive points (middle point is vertex) is either less than PI-epsilon or
+     * greater than PI + epsilon
+     */
     public boolean condition2() {
         Point[] POINTS = settings.POINTS;
         return settings.NUMPOINTS >= 3 && IntStream.range(0, settings.NUMPOINTS - 2).anyMatch(
-                (index) -> (!POINTS[index + 1].isEqualTo(POINTS[index]) && !POINTS[index + 2].isEqualTo(POINTS[index]) &&
+                (index) -> (POINTS[index + 1].angle(POINTS[index], POINTS[index + 2]).isPresent()) &&
                         (
-                                POINTS[index + 1].angle(POINTS[index], POINTS[index + 2])
+                                POINTS[index + 1].angle(POINTS[index], POINTS[index + 2]).get()
                                         < Math.PI - settings.PARAMETERS.EPSILON
                                     ||
-                                POINTS[index + 1].angle(POINTS[index], POINTS[index + 2])
+                                POINTS[index + 1].angle(POINTS[index], POINTS[index + 2]).get()
                                         > Math.PI + settings.PARAMETERS.EPSILON
                         )
-                )
-        );
+                );
     }
 
+    /**
+     * Checks LIC 3
+     * @return true if some three consecutive points form triangle with area greater than AREA1
+     */
     public boolean condition3() {
         return IntStream.range(0, settings.NUMPOINTS - 2).anyMatch(
                 (index) -> Point.triangleArea(settings.POINTS[index], settings.POINTS[index + 1],
@@ -122,10 +151,9 @@ public class Decide {
                         .anyMatch((index) -> settings.POINTS[index]
                                 .isEqualTo(settings.POINTS[index + settings.PARAMETERS.N_PTS - 1])
                                         // Index + 1 because we choose the first point as the coincident point
-                                        ? IntStream.range(index + 1, index + settings.PARAMETERS.N_PTS - 1).reduce(0, (
-                                                total,
-                                                currentIndex) -> (int) (total + Math.round(settings.POINTS[index] // ! Rounding here could pose a problem, depending on accuracy it should be fine
-                                                        .distance(settings.POINTS[currentIndex])))) > DIST
+                                        ? IntStream.range(index + 1, index + settings.PARAMETERS.N_PTS - 1).mapToDouble(
+                                                index1 -> settings.POINTS[index1].distance(settings.POINTS[index]))
+                                                .sum() > DIST
                                         : Arrays.stream(settings.POINTS, index, index + settings.PARAMETERS.N_PTS - 1)
                                                 .anyMatch(
                                                         (currentPoint) -> (currentPoint
@@ -158,17 +186,14 @@ public class Decide {
         int C_PTS = settings.PARAMETERS.C_PTS;
         int D_PTS = settings.PARAMETERS.D_PTS;
         return settings.NUMPOINTS >= 5 && IntStream.range(0, settings.NUMPOINTS - 2 - C_PTS - D_PTS).anyMatch(
-                (index) -> (!POINTS[index + 1 + C_PTS].isEqualTo(POINTS[index])
-                        && !POINTS[index + 1 + C_PTS].isEqualTo(POINTS[index + 2 + C_PTS + D_PTS]) &&
+                (index) -> (POINTS[index + 1 + C_PTS].angle(POINTS[index], POINTS[index + 2 + C_PTS + D_PTS]).isPresent()) &&
                         (
-                                POINTS[index + 1 + C_PTS].angle(POINTS[index], POINTS[index + 2 + C_PTS + D_PTS])
+                                POINTS[index + 1 + C_PTS].angle(POINTS[index], POINTS[index + 2 + C_PTS + D_PTS]).get()
                                         < Math.PI - settings.PARAMETERS.EPSILON
                                     ||
-                                POINTS[index + 1 + C_PTS].angle(POINTS[index], POINTS[index + 2 + C_PTS + D_PTS])
-                                        > Math.PI + settings.PARAMETERS.EPSILON
-                        )
-                )
-        );
+                                POINTS[index + 1 + C_PTS].angle(POINTS[index], POINTS[index + 2 + C_PTS + D_PTS]).get()
+                                        > Math.PI + settings.PARAMETERS.EPSILON)
+                );
     }
 
     public boolean condition10() {
