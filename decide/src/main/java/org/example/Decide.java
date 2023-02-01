@@ -168,6 +168,12 @@ public class Decide {
                 (index) -> settings.POINTS[index + 1].x - settings.POINTS[index].x < 0);
     }
 
+    /**
+     * Checks LIC 6
+     * See spec. for more on particular cases
+     * @return true if there exists N_PTS consecutive points with one of them
+     * laying further than DIST from the line joining the first and last of the points.
+     */
     public boolean condition6() {
         if (!(3 <= settings.PARAMETERS.N_PTS && settings.PARAMETERS.N_PTS <= settings.NUMPOINTS && 0 <= settings.PARAMETERS.DIST))
             return false;
@@ -210,7 +216,6 @@ public class Decide {
 
     /**
      * Checks LIC 8
-     *
      * See spec. for more details
      * @return true if cannot constrain all three points, separated by first A_PTS and then B_PTS points between, on/within
      * circle of radius RADIUS1
