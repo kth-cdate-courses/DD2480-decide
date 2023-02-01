@@ -1,10 +1,13 @@
 package org.example;
 
-public class Point {
-    public final int x;
-    public final int y;
+import java.util.Optional;
 
-    public Point(int x, int y) {
+
+public class Point {
+    public final double x;
+    public final double y;
+
+    public Point(double x, double y) {
         this.x = x;
         this.y = y;
     }
@@ -19,14 +22,19 @@ public class Point {
 
     /**
      * Computes the angle from which Point p is the vertex.
-     *
+     * If one of the outer points coincides with the vertex, the angle is undefined.
+     * We then return an empty optional value
      * @param p2 first outer point of the angle
      * @param p3 second outer point of the angle
-     * @return the angle formed by (p,p2) and (p,p3) in rad
+     * @return Option containing either the angle formed by (p,p2) and (p,p3) in rad if it is defined, or empty value
      */
-    public double angle(Point p2, Point p3) {
+    public Optional<Double> angle(Point p2, Point p3) {
+        if (distance(p2) == 0 || distance(p3) == 0)
+        {
+            return Optional.empty();
+        }
         double scalarProduct = (p2.x - x) * (p3.x - x) + (p2.y - y) * (p3.y - y);
-        return Math.acos(scalarProduct / (distance(p2) * distance(p3)));
+        return Optional.of(Math.acos(scalarProduct / (distance(p2) * distance(p3))));
     }
 
     /**
@@ -36,22 +44,24 @@ public class Point {
      * Else:
      * the smallest circle is the circumscribed circle.
      * the radius is computed with the formula : R = a * b * c / (4 * S)
-     *
      * @param p1 first point
      * @param p2 second point
      * @param p3 third point
      * @return radius of the smallest circle containing p1, p2 and p3
      */
     public static double smallestCircleRadius(Point p1, Point p2, Point p3) {
-        // checking if any of the angles is obtuse
-        if (p1.angle(p2, p3) > Math.PI / 2) {
+        Optional<Double> angle1 = p1.angle(p2, p3);
+        Optional<Double> angle2 = p2.angle(p1, p3);
+        Optional<Double> angle3 = p3.angle(p1, p2);
+        // checking if any of the angles is undefined or obtuse
+        if (angle1.isEmpty() || p1.angle(p2, p3).get() > Math.PI / 2){
             return (p2.distance(p3) / 2);
         }
-        if (p2.angle(p1, p3) > Math.PI / 2) {
-            return (p1.distance(p3) / 2);
+        if (angle2.isEmpty() || p2.angle(p1, p3).get() > Math.PI / 2) {
+            return (p1.distance(p3)/2);
         }
-        if (p3.angle(p1, p2) > Math.PI / 2) {
-            return (p1.distance(p2) / 2);
+        if (angle3.isEmpty() ||p3.angle(p1, p2).get() > Math.PI / 2) {
+            return (p1.distance(p2)/2);
         }
         // else, computing the radius of the circumscribed circle
         else {
@@ -101,22 +111,36 @@ public class Point {
     }
 
     public Boolean isEqualTo(Point other) {
-        return x == other.x && y == other.y;
+        return (Math.abs(x - other.x) < 10e-6) && (Math.abs(y - other.y) < 10e-6);
     }
 
     /*
-     * Get the intersect point between the line formed by p2 -> p3
+     * Get intersect point between the line formed by p2 -> p3
      * and the perpendicular line through "this" point.
      */
     public Point getIntersectPoint(Point p2, Point p3) {
+
+        // If p2 and p3 are the same then 
+        if (p2.isEqualTo(p3)) {
+            throw new Error("p2 and p3 are the same point");
+        }
+
+
+        // Edge case here when k1 is completely horizontal (or vertical)
+        // That will create a division by 0 if we don't have this check  
+        if (p3.y == p2.y) {
+            return new Point(x, p2.y);
+        } else if (p3.x == p2.x) {
+            return new Point(p2.x, y);
+        }
+
         // Get conflict point between p1 and p2
-        int k1 = (p3.y - p2.y) / (p3.x - p2.x);
-        int m1 = p2.y - k1 * p2.x;
-        int k2 = -1 / k1;
-        int m2 = y - k2 * x;
-        int x = (m2 - m1) / (k1 - k2);
-        int y = k1 * x + m1;
+        double k1 = (p3.y - p2.y) / (p3.x - p2.x);
+        double m1 = p2.y - k1 * p2.x;
+        double k2 = -1 / k1;
+        double m2 = y - k2 * x;
+        double x = (m2 - m1) / (k1 - k2);
+        double y = k1 * x + m1;
         return new Point(x, y);
     }
 }
-
