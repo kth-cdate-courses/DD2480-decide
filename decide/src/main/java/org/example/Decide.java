@@ -221,6 +221,10 @@ public class Decide {
     }
 
     public boolean condition10() {
+        if (!(1 <= settings.PARAMETERS.E_PTS && 1 <= settings.PARAMETERS.F_PTS &&
+                settings.PARAMETERS.E_PTS + settings.PARAMETERS.F_PTS <= settings.NUMPOINTS - 3)) {
+            return false;
+        }
         Predicate<Double> areaIsGreaterThanArea1 = a -> (a > settings.PARAMETERS.AREA1);
         return settings.NUMPOINTS >= 5 && spacedTriangleGivenAreaConstraintExists(areaIsGreaterThanArea1);
     }
