@@ -129,6 +129,12 @@ public class Decide {
                         settings.POINTS[index + 2]) > settings.PARAMETERS.AREA1);
     }
 
+    /**
+     * Checks LIC 4.
+     *
+     * See spec. for more details
+     * @return true if Q_PTS consecutive points are located in more than QUADS quadrants.
+     */
     public boolean condition4() {
         return IntStream.range(0, settings.NUMPOINTS - settings.PARAMETERS.Q_PTS + 1).anyMatch(
                 (index) -> Point.quadrantRepartition(
