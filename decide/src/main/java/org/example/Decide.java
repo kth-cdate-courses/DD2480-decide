@@ -81,6 +81,12 @@ public class Decide {
         return preliminaryUnlockingMatrix;
     }
 
+    /**
+     * Takes the Preliminary Unlocking Matrix and computes the Final Unlocking Vector from it.
+     * For that, uses the Preliminary Unlocking Vector to see which LICs are to be considered.
+     * @param preliminaryUnlockingMatrix boolean matrix representing the PUM
+     * @return boolean vector representing the FUV
+     */
     public Boolean[] computeFinalUnlockingVector(Boolean[][] preliminaryUnlockingMatrix) {
         Boolean[] finalUnlockingVector = new Boolean[15];
         for (int i = 0; i < 15; i++) {
